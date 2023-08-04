@@ -1,0 +1,4 @@
+# Ignorar archivos y directorios generados automáticamente
+node_modules/
+build/
+dist/
