@@ -73,4 +73,18 @@ router.put("/editar-anuncio/:id", async (req, res) => {
   }
 });
 
+// Ruta para eliminar un anuncio por ID
+router.delete("/borrar-anuncio/:id", async (req, res) => {
+  try {
+    const deletedAd = await Anuncio.findByIdAndDelete(req.params.id);
+    if (!deletedAd) {
+      return res.status(404).json({ error: "Anuncio no encontrado" });
+    }
+    res.json({ message: "Anuncio eliminado exitosamente" });
+  } catch (error) {
+    res.status(500).json({ error: "Error al eliminar el anuncio" });
+  }
+});
+
+
 module.exports = router;
