@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const mongoose = require("mongoose");
 
 // suscripcion a eventos de errores
@@ -11,6 +13,6 @@ mongoose.connection.once("open", () => {
 });
 
 //conexion a DB
-mongoose.connect("mongodb://127.0.0.1:27017/wallapop");
+mongoose.connect(process.env.MONGODB_CONNECTION_STR);
 
 module.exports = mongoose.connection;
