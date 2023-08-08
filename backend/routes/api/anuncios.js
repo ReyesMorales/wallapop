@@ -7,7 +7,6 @@ const Anuncio = require("../../models/Anuncio.js");
 router.get("/", async (req, res, next) => {
   try {
     const anuncios = await Anuncio.find();
-    console.log(anuncios);
     res.json({ results: anuncios });
   } catch (error) {
     console.log(error); //TODO:BORRAR cuando dev termine
