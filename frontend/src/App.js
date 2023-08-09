@@ -1,28 +1,28 @@
 import "./App.css";
-import axios from "axios";
-import { useState, useEffect } from "react";
+import { Suspense, lazy } from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
+
+const ListadoAnuncios = lazy(() =>
+  import("./componentes/anuncios/ListadoAnuncios")
+);
 
 function App() {
-  const [anuncios, setAnuncios] = useState([]);
-
-  useEffect(() => {
-    axios.get("http://localhost:4000/api/anuncios").then((response) => {
-      setAnuncios(response.data.results);
-    });
-  }, []);
-
   return (
-    <div className="App">
-      <h1>Hello ducks!</h1>
-      <ul>
-        {anuncios.map((anuncio) => (
-          <li key={anuncio.id}>
-            {anuncio.name}
-            {anuncio.price}
-          </li>
-        ))}
-      </ul>
-    </div>
+    <Router>
+      <div className="App">
+        <Suspense fallback={<div>Loading...</div>}>
+          <Routes>
+            <Route path="/anuncios" element={<ListadoAnuncios />} />
+            <Route path="/" element={<Navigate to="/anuncios" />} />
+          </Routes>
+        </Suspense>
+      </div>
+    </Router>
   );
 }
 
