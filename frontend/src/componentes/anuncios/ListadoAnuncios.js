@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const ListadoAnuncios = () => {
+  //TODO: dispatch to props
   const [anuncios, setAnuncios] = useState([]);
 
   //TODO: mover llamada a API a un componente
