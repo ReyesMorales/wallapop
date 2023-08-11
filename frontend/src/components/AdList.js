@@ -30,6 +30,12 @@ function AdList() {
           <li key={ad._id}>
             <h3>{ad.titulo}</h3>
             <p>{ad.descripcion}</p>
+            {ad.foto && ( 
+        <img
+          src={ad.foto}
+          alt={`Imagen de ${ad.titulo}`}
+        />
+      )}
             <Link to={`/editar-anuncio/${ad._id}`}>Editar Anuncio</Link>
             <DeleteAd id={ad._id} onDelete={handleDelete} />
           </li>

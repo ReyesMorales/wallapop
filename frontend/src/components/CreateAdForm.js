@@ -1,19 +1,27 @@
-import React, { useState } from 'react';
-import { Form, Button, Container, Row, Col, Alert, Modal } from 'react-bootstrap';
-import axios from 'axios';
+import React, { useState } from "react";
+import {
+  Form,
+  Button,
+  Container,
+  Row,
+  Col,
+  Alert,
+  Modal,
+} from "react-bootstrap";
+import axios from "axios";
 
 function CreateAdForm() {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [type, setType] = useState('compra'); // Por defecto, el tipo es "compra"
-  const [price, setPrice] = useState('');
-  const [photo, setPhoto] = useState(''); // Para almacenar la foto seleccionada
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [type, setType] = useState("compra"); // Por defecto, el tipo es "compra"
+  const [price, setPrice] = useState("");
+  const [photo, setPhoto] = useState("");
 
   // Estado para almacenar el mensaje de éxito
-  const [successMessage, setSuccessMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState("");
 
   // Estado para almacenar el mensaje de error
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
 
   // Estado para almacenar mensajes de error de validacion
   const [formErrors, setFormErrors] = useState({});
@@ -25,27 +33,27 @@ function CreateAdForm() {
     const errors = {};
     // Comprobaciones para cada campo requerido
     if (!title) {
-      errors.title = 'El título es obligatorio';
+      errors.title = "El título es obligatorio";
     }
     if (!description) {
-      errors.description = 'La descripción es obligatoria';
+      errors.description = "La descripción es obligatoria";
     }
     if (!price) {
-      errors.price = 'El precio es obligatorio';
+      errors.price = "El precio es obligatorio";
     }
-  
+
     // Actualiza el estado de los errores de validación
     setFormErrors(errors);
-  
+
     // Devuelve true si no hay errores, de lo contrario, devuelve false
     return Object.keys(errors).length === 0;
   };
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     // Realiza la validación del formulario antes de enviar la solicitud
-    if (validateForm()) {    
+    if (validateForm()) {
       // Mostrar el Modal de confirmación
       setShowModal(true);
     }
@@ -53,7 +61,7 @@ function CreateAdForm() {
 
   const handleConfirm = () => {
     // Cerrar el Modal de confirmación
-    setShowModal(false);    
+    setShowModal(false);
 
     // Crear el objeto que representa el nuevo anuncio
     const newAd = {
@@ -64,26 +72,33 @@ function CreateAdForm() {
       foto: photo,
     };
 
-    console.log('newAd', newAd )
+    console.log("newAd", newAd);
 
     // Realizar la petición POST al backend
     axios
-      .post('http://localhost:5000/api/anuncios/crear-anuncio', newAd)
+      .post("http://localhost:5000/api/anuncios/crear-anuncio", newAd, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      //.post('http://localhost:5000/api/anuncios/crear-anuncio', newAd)
       .then((response) => {
         // Si la petición fue exitosa, establecer el mensaje de éxito
-        setSuccessMessage('Anuncio creado con éxito');
-        setErrorMessage('');
+        setSuccessMessage("Anuncio creado con éxito");
+        setErrorMessage("");
         // Restablecer los campos del formulario para crear un nuevo anuncio
-        setTitle('');
-        setDescription('');
-        setType('compra');
-        setPrice('');
-        setPhoto('');
+        setTitle("");
+        setDescription("");
+        setType("compra");
+        setPrice("");
+        setPhoto("");
       })
       .catch((error) => {
         // Si ocurre un error, establecer el mensaje de error y limpiar el mensaje de éxito
-        setErrorMessage('Error al crear el anuncio. Por favor, inténtalo de nuevo.');
-        setSuccessMessage('');
+        setErrorMessage(
+          "Error al crear el anuncio. Por favor, inténtalo de nuevo."
+        );
+        setSuccessMessage("");
       });
   };
 
@@ -92,19 +107,20 @@ function CreateAdForm() {
     setShowModal(false);
   };
 
-
   // Lógica para manejar el envío del formulario y crear el anuncio
 
   return (
     <Container>
       <Row className="justify-content-md-center">
         <Col md="6">
-          {/* Agregar el Modal de confirmación */}
+          {/*Modal de confirmación */}
           <Modal show={showModal} onHide={handleCancel}>
             <Modal.Header closeButton>
               <Modal.Title>Confirmar</Modal.Title>
             </Modal.Header>
-            <Modal.Body>¿Estás seguro de que deseas crear el anuncio?</Modal.Body>
+            <Modal.Body>
+              ¿Estás seguro de que deseas crear el anuncio?
+            </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={handleCancel}>
                 Cancelar
@@ -115,10 +131,10 @@ function CreateAdForm() {
             </Modal.Footer>
           </Modal>
 
-           {/* Agregar un componente Alert para mostrar el mensaje de éxito */}
-           {successMessage && <Alert variant="success">{successMessage}</Alert>}
-           {/* Agregar un componente Alert para mostrar el mensaje de error */}
-           {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
+          {/*Alert para mostrar el mensaje de éxito */}
+          {successMessage && <Alert variant="success">{successMessage}</Alert>}
+          {/*Alert para mostrar el mensaje de error */}
+          {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
           <Form onSubmit={handleSubmit} encType="multipart/form-data">
             <Form.Group controlId="formTitle">
               <Form.Label>Título</Form.Label>
@@ -128,7 +144,11 @@ function CreateAdForm() {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               />
-              {formErrors.title && <Form.Text className="text-danger">{formErrors.title}</Form.Text>}
+              {formErrors.title && (
+                <Form.Text className="text-danger">
+                  {formErrors.title}
+                </Form.Text>
+              )}
             </Form.Group>
 
             <Form.Group controlId="formDescription">
@@ -140,7 +160,11 @@ function CreateAdForm() {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               />
-              {formErrors.description && <Form.Text className="text-danger">{formErrors.description}</Form.Text>}
+              {formErrors.description && (
+                <Form.Text className="text-danger">
+                  {formErrors.description}
+                </Form.Text>
+              )}
             </Form.Group>
 
             <Form.Group controlId="formType">
@@ -163,7 +187,11 @@ function CreateAdForm() {
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
               />
-               {formErrors.price && <Form.Text className="text-danger">{formErrors.price}</Form.Text>}
+              {formErrors.price && (
+                <Form.Text className="text-danger">
+                  {formErrors.price}
+                </Form.Text>
+              )}
             </Form.Group>
 
             <Form.Group controlId="formPhoto">
@@ -171,10 +199,10 @@ function CreateAdForm() {
               <Form.Control
                 type="file"
                 accept=".jpg, .jpeg, .png, .pdf, .doc, .docx"
+                name="foto"
                 onChange={(e) => setPhoto(e.target.files[0])}
               />
             </Form.Group>
-
 
             <Button variant="primary" type="submit">
               Crear Anuncio
@@ -185,6 +213,5 @@ function CreateAdForm() {
     </Container>
   );
 }
-
 
 export default CreateAdForm;
