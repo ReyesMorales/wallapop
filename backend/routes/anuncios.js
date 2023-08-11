@@ -2,6 +2,23 @@
 const express = require("express");
 const router = express.Router();
 const Anuncio = require("../models/anuncio");
+const multer = require('multer');
+const path = require('path');
+
+
+// Configurar el almacenamiento de archivos con Multer
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/'); // Carpeta donde se almacenarán los archivos
+  },
+  filename: function (req, file, cb) {
+    // Renombrar el archivo para evitar conflictos de nombres
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    cb(null, uniqueSuffix + path.extname(file.originalname));
+  },
+});
+
+const upload = multer({ storage: storage });
 
 // Ruta para obtener la lista de anuncios
 router.get("/lista-anuncios", async (req, res) => {
@@ -24,16 +41,20 @@ router.get("/:id", async (req, res) => {
 });
 
 // Ruta para crear un nuevo anuncio
-router.post("/crear-anuncio", async (req, res) => {
+router.post("/crear-anuncio", upload.single('foto'), async (req, res) => {
   try {
     console.log("Datos enviados desde el frontend:", req.body);
     // Obtener los datos del anuncio desde el cuerpo de la solicitud
-    const { titulo, descripcion, tipo, precio, foto } = req.body;
+    const { titulo, descripcion, tipo, precio } = req.body;
+
+    // Obtener el nombre del archivo del campo de "foto" cargado
+    const foto = req.file.filename;
 
     // Crear un objeto con los datos del anuncio
     const nuevoAnuncio = new Anuncio({
       titulo,
       descripcion,
+      
       tipo,
       precio,
       foto,
