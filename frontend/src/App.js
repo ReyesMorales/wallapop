@@ -1,31 +1,28 @@
-import "bootstrap/dist/css/bootstrap.min.css";
+import React, { Suspense, lazy } from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 
-import "./App.css";
-import { Suspense, lazy } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Navigate,
-} from "react-router-dom";
 
-const ListadoAnuncios = lazy(() =>
-  import("./componentes/anuncios/ListadoAnuncios")
-);
+const AdvertsList = lazy(() => import('./components/adverts/AdvertsList'));
+const CreateAdForm = lazy(() => import('./components/adverts/CreateAdForm'));
+const EditAdForm = lazy(() => import('./components/adverts/EditAdForm'));
 
 function App() {
   return (
-    <Router>
-      <div className="App">
+    <div>
+      <h1>WallaClone</h1>
+      <Router>
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
-            <Route path="/anuncios" element={<ListadoAnuncios />} />
-            <Route path="/" element={<Navigate to="/anuncios" />} />
+            <Route path="/lista-anuncios" element={<AdvertsList />} />
+            <Route path="/crear-anuncio" element={<CreateAdForm />} />
+            <Route path="/editar-anuncio/:id" element={<EditAdForm />} />
+            <Route path="/" element={<Navigate to="/lista-anuncios" />} />
           </Routes>
         </Suspense>
-      </div>
-    </Router>
+      </Router>
+    </div>
   );
 }
 
 export default App;
+
