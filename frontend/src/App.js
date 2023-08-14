@@ -13,10 +13,9 @@ function App() {
       <Router>
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
-            <Route path="/lista-anuncios" element={<AdvertsList />} />
+            <Route path="/" element={<AdvertsList />} />
             <Route path="/crear-anuncio" element={<CreateAdForm />} />
             <Route path="/editar-anuncio/:id" element={<EditAdForm />} />
-            <Route path="/" element={<Navigate to="/lista-anuncios" />} />
           </Routes>
         </Suspense>
       </Router>
