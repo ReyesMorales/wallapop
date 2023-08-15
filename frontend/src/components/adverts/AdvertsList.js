@@ -2,16 +2,16 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from 'react-router-dom';
 import DeleteAd from './DeleteAd';
+import { getLatestAdverts } from "./service";
 
 function AdvertsList() {
-  const [ads, setAds] = useState([]);
+  const [adverts, setAdverts] = useState([]);
 
   useEffect(() => {
-    // Hacer una solicitud GET al backend para obtener la lista de anuncios
-    axios.get('http://localhost:5000/api/anuncios/lista-anuncios')
-      .then(response => {
-        setAds(response.data);
-      })
+    // toma la lista de anuncios del backend por axios
+    getLatestAdverts().then((adverts) => {
+      setAdverts(adverts);
+      })      
       .catch(error => {
         console.error('Error al obtener la lista de anuncios:', error);
       });
@@ -20,25 +20,25 @@ function AdvertsList() {
 
   const handleDelete = (deletedAdId) => {
     // Actualizar la lista de anuncios eliminando el anuncio con el ID proporcionado
-    setAds(prevAds => prevAds.filter(ad => ad._id !== deletedAdId));
+    setAdverts(prevAdverts => prevAdverts.filter(advert => advert._id !== deletedAdvertId));
   };
 
   return (
-    <div className="ListadoAnuncios">
+    <div className="AdvertsList">
       <h1>Hello ducks!</h1>
       <ul>
-        {ads.map(ad => (
-          <li key={ad._id}>
-            <h3>{ad.title}</h3>
-            <p>{ad.description}</p>
-            {ad.photo && ( 
+        {adverts.map(advert => (
+          <li key={advert._id}>
+            <h3>{advert.title}</h3>
+            <p>{advert.description}</p>
+            {advert.photo && ( 
         <img
-          src={ad.photo}
-          alt={`Imagen de ${ad.title}`}
+          src={advert.photo}
+          alt={`Imagen de ${advert.title}`}
         />
       )}
-            <Link to={`/editar-anuncio/${ad._id}`}>Editar Anuncio</Link>
-            <DeleteAd id={ad._id} onDelete={handleDelete} />
+            <Link to={`/editar-anuncio/${advert._id}`}>Editar Anuncio</Link>
+            <DeleteAd id={advert._id} onDelete={handleDelete} />
           </li>
         ))}
       </ul>
