@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { Link } from 'react-router-dom';
 import DeleteAd from './DeleteAd';
 import { getLatestAdverts } from "./service";
@@ -20,7 +19,7 @@ function AdvertsList() {
 
   const handleDelete = (deletedAdId) => {
     // Actualizar la lista de anuncios eliminando el anuncio con el ID proporcionado
-    setAdverts(prevAdverts => prevAdverts.filter(advert => advert._id !== deletedAdvertId));
+    setAdverts(prevAdverts => prevAdverts.filter(advert => advert._id !== deletedAdId));
   };
 
   return (
@@ -42,7 +41,7 @@ function AdvertsList() {
           </li>
         ))}
       </ul>
-      <Link to="/crear-anuncio">Crear Anuncio</Link>
+      <Link to="/create-advert">Crear Anuncio</Link>
 
     </div>
   );
