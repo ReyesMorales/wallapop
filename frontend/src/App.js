@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
 const AdvertsList = lazy(() => import('./components/adverts/AdvertsList'));
@@ -14,7 +14,7 @@ function App() {
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
             <Route path="/" element={<AdvertsList />} />
-            <Route path="/crear-anuncio" element={<CreateAdForm />} />
+            <Route path="/create-advert" element={<CreateAdForm />} />
             <Route path="/editar-anuncio/:id" element={<EditAdForm />} />
           </Routes>
         </Suspense>
