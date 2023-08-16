@@ -8,7 +8,8 @@ import {
   Alert,
   Modal,
 } from "react-bootstrap";
-import axios from "axios";
+import { createAd } from "./service"; 
+
 
 function CreateAdForm() {
   const [title, setTitle] = useState("");
@@ -59,11 +60,11 @@ function CreateAdForm() {
     }
   };
 
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
     // Cerrar el Modal de confirmación
     setShowModal(false);
 
-    // Crear el objeto que representa el nuevo anuncio
+    
     const newAd = {
       title: title,
       description: description,
@@ -72,34 +73,23 @@ function CreateAdForm() {
       photo: photo,
     };
 
-    console.log("newAd", newAd);
-
     // Realizar la petición POST al backend
-    axios
-      .post("http://localhost:5000/api/anuncios/crear-anuncio", newAd, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
-      //.post('http://localhost:5000/api/anuncios/crear-anuncio', newAd)
-      .then((response) => {
-        // Si la petición fue exitosa, establecer el mensaje de éxito
-        setSuccessMessage("Anuncio creado con éxito");
-        setErrorMessage("");
-        // Restablecer los campos del formulario para crear un nuevo anuncio
-        setTitle("");
-        setDescription("");
-        setType("compra");
-        setPrice("");
-        setPhoto("");
-      })
-      .catch((error) => {
+    try {
+      await createAd(newAd); // Llama a la función de la API
+      setSuccessMessage("Anuncio creado con éxito");
+      setErrorMessage("");
+      setTitle("");
+      setDescription("");
+      setType("compra");
+      setPrice("");
+      setPhoto("");
+    } catch(error) {
         // Si ocurre un error, establecer el mensaje de error y limpiar el mensaje de éxito
         setErrorMessage(
           "Error al crear el anuncio. Por favor, inténtalo de nuevo."
         );
         setSuccessMessage("");
-      });
+      };
   };
 
   const handleCancel = () => {
@@ -200,7 +190,6 @@ function CreateAdForm() {
                 type="file"
                 accept=".jpg, .jpeg, .png, .pdf, .doc, .docx"
                 name="photo"
-                value={photo}
                 onChange={(e) => setPhoto(e.target.files[0])}
               />
             </Form.Group>
