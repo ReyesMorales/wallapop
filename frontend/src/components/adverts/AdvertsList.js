@@ -6,16 +6,34 @@ import { getLatestAdverts } from "./service";
 function AdvertsList() {
   const [adverts, setAdverts] = useState([]);
 
+  // useEffect(() => {
+  //   // toma la lista de anuncios del backend por axios
+  //   getLatestAdverts().then((adverts) => {
+  //     console.log(adverts)
+  //     setAdverts(adverts);
+  //     })      
+  //     .catch(error => {
+  //       console.error('Error al obtener la lista de anuncios:', error);
+  //     });
+  // }, []);
+
   useEffect(() => {
-    // toma la lista de anuncios del backend por axios
-    getLatestAdverts().then((adverts) => {
-      setAdverts(adverts);
-      })      
-      .catch(error => {
-        console.error('Error al obtener la lista de anuncios:', error);
+    getLatestAdverts()
+      .then((response) => {
+        console.log("response:", response); // Verifica la respuesta completa
+        if (response && response.data) {
+          console.log("response.data:", response.data); // Verifica los datos recibidos
+          setAdverts(response.data);
+        } else {
+          console.error("Respuesta de la API incorrecta:", response);
+        }
+      })
+      .catch((error) => {
+        console.error("Error al obtener la lista de anuncios:", error);
       });
   }, []);
-
+  
+  
 
   const handleDelete = (deletedAdId) => {
     // Actualizar la lista de anuncios eliminando el anuncio con el ID proporcionado
@@ -26,7 +44,7 @@ function AdvertsList() {
     <div className="AdvertsList">
       <h1>Hello ducks!</h1>
       <ul>
-        {adverts.map(advert => (
+        {adverts && adverts.map(advert => (
           <li key={advert._id}>
             <h3>{advert.title}</h3>
             <p>{advert.description}</p>
