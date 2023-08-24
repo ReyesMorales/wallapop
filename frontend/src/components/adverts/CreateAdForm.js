@@ -12,10 +12,11 @@ import { createAd } from "./service";
 
 
 function CreateAdForm() {
-  const [title, setTitle] = useState("");
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [type, setType] = useState("compra"); // Por defecto, el tipo es "compra"
-  const [price, setPrice] = useState("");
+  const [tags, setTags] = useState("");
   const [photo, setPhoto] = useState("");
 
   // Estado para almacenar el mensaje de éxito
@@ -33,14 +34,17 @@ function CreateAdForm() {
   const validateForm = () => {
     const errors = {};
     // Comprobaciones para cada campo requerido
-    if (!title) {
-      errors.title = "El título es obligatorio";
+    if (!name) {
+      errors.name = "El título es obligatorio";
     }
     if (!description) {
       errors.description = "La descripción es obligatoria";
     }
     if (!price) {
       errors.price = "El precio es obligatorio";
+    }
+    if (!tags) {
+      errors.tags = "Las etiquetas son obligatorias";
     }
 
     // Actualiza el estado de los errores de validación
@@ -65,24 +69,28 @@ function CreateAdForm() {
     setShowModal(false);
 
     
-    const newAd = {
-      title: title,
+    const newAdvert = {
+      name: name,
+      price: parseFloat(price),
       description: description,
-      type: type,
-      price: price,
+      type: type,      
+      tags: tags.split(",").map((tag) => tag.trim()), // Divide la cadena y elimina espacios en blanco
       photo: photo,
     };
+    console.log("Datos a enviar al servidor:", newAdvert);
 
-    // Realizar la petición POST al backend
-    try {
-      await createAd(newAd); // Llama a la función de la API
-      setSuccessMessage("Anuncio creado con éxito");
-      setErrorMessage("");
-      setTitle("");
-      setDescription("");
-      setType("compra");
-      setPrice("");
-      setPhoto("");
+
+       // Realizar la petición POST al backend
+       try {
+        await createAd(newAdvert); // Llama a la función de la API
+        setSuccessMessage("Anuncio creado con éxito");
+        setErrorMessage("");
+        setName("");
+        setPrice("");
+        setDescription("");
+        setType("compra");        
+        setTags("");
+        setPhoto("");
     } catch(error) {
         // Si ocurre un error, establecer el mensaje de error y limpiar el mensaje de éxito
         setErrorMessage(
@@ -106,7 +114,7 @@ function CreateAdForm() {
           {/*Modal de confirmación */}
           <Modal show={showModal} onHide={handleCancel}>
             <Modal.Header closeButton>
-              <Modal.Title>Confirmar</Modal.Title>
+            <Modal.Title>Confirmar</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               ¿Estás seguro de que deseas crear el anuncio?
@@ -126,17 +134,32 @@ function CreateAdForm() {
           {/*Alert para mostrar el mensaje de error */}
           {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
           <Form onSubmit={handleSubmit} encType="multipart/form-data">
-            <Form.Group controlId="formTitle">
+            <Form.Group controlId="formName">
               <Form.Label>Título</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Escribe el título"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               />
-              {formErrors.title && (
+              {formErrors.name && (
                 <Form.Text className="text-danger">
-                  {formErrors.title}
+                  {formErrors.name}
+                </Form.Text>
+              )}
+            </Form.Group>
+
+            <Form.Group controlId="formPrice">
+              <Form.Label>Precio</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="Escribe el precio"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+              />
+              {formErrors.price && (
+                <Form.Text className="text-danger">
+                  {formErrors.price}
                 </Form.Text>
               )}
             </Form.Group>
@@ -169,18 +192,16 @@ function CreateAdForm() {
               </Form.Control>
             </Form.Group>
 
-            <Form.Group controlId="formPrice">
-              <Form.Label>Precio</Form.Label>
+            <Form.Group controlId="formTags">
+              <Form.Label>Etiquetas (separadas por comas)</Form.Label>
               <Form.Control
-                type="number"
-                placeholder="Escribe el precio"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
+                type="text"
+                placeholder="Ejemplo: etiqueta1, etiqueta2"
+                value={tags}
+                onChange={(e) => setTags(e.target.value)}
               />
-              {formErrors.price && (
-                <Form.Text className="text-danger">
-                  {formErrors.price}
-                </Form.Text>
+              {formErrors.tags && (
+                <Form.Text className="text-danger">{formErrors.tags}</Form.Text>
               )}
             </Form.Group>
 
