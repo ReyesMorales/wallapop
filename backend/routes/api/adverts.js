@@ -1,60 +1,41 @@
 const express = require("express");
 const router = express.Router();
+const cors = require("cors");
+//carga del modelo de anuncio
 const Advert = require("../../models/Advert.js");
-const multer = require('multer');
-const path = require('path');
 
-// Configurar el almacenamiento de archivos con Multer
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads/'); // Carpeta donde se almacenarán los archivos
-  },
-  filename: function (req, file, cb) {
-    // Renombrar el archivo para evitar conflictos de nombres
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    cb(null, uniqueSuffix + path.extname(file.originalname));
-  },
-});
+router.use(cors());
 
-const upload = multer({ storage: storage });
-
-
-// Ruta para obtener la lista de anuncios  GET /api/anuncios
+// GET /api/adverts
 router.get("/", async (req, res, next) => {
   try {
-    const ads = await Anuncio.find();
-    res.json(ads);
+    const adverts = await Advert.find();
+    res.json({ results: adverts });
   } catch (error) {
-    next(error);
-  }
-});
-
-// Ruta para obtener un anuncio por ID
-router.get("/:id", async (req, res, next) => {
-  try {
-    const ad = await Anuncio.findById(req.params.id);
-    res.json(ad);
-  } catch (error) {
+    console.log(error); //TODO:BORRAR cuando dev termine
     next(error);
   }
 });
 
 // Ruta para crear un nuevo anuncio
-router.post("/crear-anuncio", upload.single('photo'), async (req, res, next) => {
+router.post("/create-advert", 
+// upload.single('photo'), 
+async (req, res, next) => {
   try {
     console.log("Datos enviados desde el frontend:", req.body);
     // Obtener los datos del anuncio desde el cuerpo de la solicitud
-    const { title, description, type, price } = req.body;
+    const { name, price, description, type, tags, photo } = req.body;
 
     // Obtener el nombre del archivo del campo de "foto" cargado
-    const photo = req.file.filename;
+    // const photo = req.file.filename;
 
     // Crear un objeto con los datos del anuncio
-    const newAdvert = new Anuncio({
-      title,
+    const newAdvert = new Advert({
+      name,
+      price,
       description,
       type,
-      price,
+      tags,
       photo,
     });
 
@@ -72,37 +53,5 @@ router.post("/crear-anuncio", upload.single('photo'), async (req, res, next) => 
     next(error);
   }
 });
-
-// Ruta para editar un anuncio por ID
-router.put("/editar-anuncio/:id", async (req, res, next) => {
-  try {
-    const updatedAd = await Anuncio.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
-    res.json(updatedAd);
-  } catch (error) {
-    next(error)
-  }
-});
-
-// Ruta para eliminar un anuncio por ID
-router.delete("/borrar-anuncio/:id", async (req, res, next) => {
-  try {
-    const deletedAd = await Anuncio.findByIdAndDelete(req.params.id);
-    if (!deletedAd) {
-      return res.status(404).json({ error: "Anuncio no encontrado" });
-    }
-    res.json({ message: "Anuncio eliminado exitosamente" });
-  } catch (error) {
-    next(error)
-  }
-});
-
-// Middleware de manejo de errores global
-router.use((error, req, res, next) => {
-  console.error("Error:", error);
-  res.status(500).json({ error: "Hubo un error en el servidor" });
-});
-
 
 module.exports = router;
