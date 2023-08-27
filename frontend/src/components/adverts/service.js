@@ -10,10 +10,15 @@ export const getLatestAdverts = () => {
   return client.get(advertsUrl);
 };
 
-export const getAdvert = (advertId) => {
-  const url = `${advertsUrl}/${advertId}`;
+export const getAdvert = (id) => {
+  const url = `${advertsUrl}/${id}`;
+  console.log("id en service", id)
   return client.get(url);
 };
+
+
+
+
 
 export const createAd = (newAdvert) => {
   console.log("Datos a enviar al servidor desde service:", newAdvert);
@@ -30,4 +35,9 @@ export const createAd = (newAdvert) => {
         "Content-Type": "multipart/form-data",
       },
     });
+  };
+
+  export const editAdvert = (id, updatedAdvert) => {
+    const url = `${advertsUrl}/edit/${id}`;
+    return client.put(url, updatedAdvert);
   };

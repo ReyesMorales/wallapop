@@ -22,6 +22,7 @@ function App() {
             <Route path="/adverts" element={<AdvertsList />} />
             <Route path="/" element={<Navigate to="/adverts" />} />
             <Route path="/create-advert" element={<CreateAdForm />} />
+            <Route path="/edit/:id" element={<EditAdForm />} />
           </Routes>
         </Suspense>
       </div>
