@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { deleteAdvert } from './service'; 
 
 function DeleteAd({ id, onDelete }) {
   const [showModal, setShowModal] = useState(false);
 
   const handleConfirm = () => {
-    // Realizar una solicitud DELETE al backend para eliminar el anuncio
-    axios.delete(`http://localhost:5000/api/anuncios/borrar-anuncio/${id}`)
+    deleteAdvert(id)
       .then(response => {
         setShowModal(false);
         onDelete(id); // Llamar a la función de borrado en el componente padre
