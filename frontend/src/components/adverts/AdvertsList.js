@@ -13,7 +13,6 @@ import { Link } from "react-router-dom";
 import placeholderPhoto from "../../assets/placeholder.png";
 import Layout from "../Layout/Layout";
 import DeleteAd from './DeleteAd';
-import { deleteAdvert } from './service'; 
 
 const AdvertsList = () => {
   //TODO: dispatch to props
@@ -27,16 +26,9 @@ const AdvertsList = () => {
   }, []);
   //TODO: el margen izquierdo de las cards desaparece
 
-  const handleDelete = async (id) => {
-    try {
-      await deleteAdvert(id);
-      // Refresca la lista de anuncios o quita el anuncio de la lista en el estado
-      setAdverts((prevAdverts) =>
-        prevAdverts.filter((advert) => advert._id !== id)
-      );
-    } catch (error) {
-      console.error("Hubo un error al borrar el anuncio:", error);
-    }
+  const handleAdDeleted = (deletedId) => {
+    // Refresca la lista de anuncios o quita el anuncio de la lista en el estado
+    setAdverts((prevAdverts) => prevAdverts.filter((advert) => advert._id !== deletedId));
   };
 
   return (
@@ -93,7 +85,7 @@ const AdvertsList = () => {
                 >
                   <Button variant="primary">Editar</Button>
                 </Link>
-                <DeleteAd onDelete={handleDelete} id={advert._id} />
+                <DeleteAd onAdDeleted={handleAdDeleted} id={advert._id} />
               </Card>
             ))}
           </CardGroup>
