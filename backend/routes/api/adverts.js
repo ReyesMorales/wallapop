@@ -17,6 +17,19 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+// Ruta para obtener un anuncio por ID
+router.get("/:id", async (req, res, next) => {
+  const id = req.params.id;
+
+  try {
+    const advert = await Advert.findById(id);
+    console.log("Anuncio encontrado:", advert);
+    res.json(advert);
+  } catch (error) {
+    next(error);
+  }
+});
+
 // Ruta para crear un nuevo anuncio
 router.post("/create-advert", 
 // upload.single('photo'), 
@@ -53,5 +66,31 @@ async (req, res, next) => {
     next(error);
   }
 });
+
+
+// Ruta para editar un anuncio por ID
+router.put("/edit/:id", async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const updatedData = req.body; // Los datos actualizados se deben enviar en el cuerpo de la solicitud
+
+    // Aquí puedes realizar la validación de datos si es necesario
+
+    // Actualizar el anuncio por su ID y obtener el anuncio actualizado
+    const updatedAd = await Advert.findByIdAndUpdate(id, updatedData, {
+      new: true,
+    });
+
+    if (!updatedAd) {
+      return res.status(404).json({ message: "Anuncio no encontrado" });
+    }
+
+    // Si se actualiza correctamente, devolver el anuncio actualizado
+    res.json(updatedAd);
+  } catch (error) {
+    next(error);
+  }
+});
+
 
 module.exports = router;
