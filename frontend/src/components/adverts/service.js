@@ -12,12 +12,10 @@ export const getLatestAdverts = () => {
 
 export const getAdvert = (id) => {
   const url = `${advertsUrl}/${id}`;
-  console.log("id en service", id);
   return client.get(url);
 };
 
 export const createAd = (newAdvert) => {
-  console.log("Datos a enviar al servidor desde service:", newAdvert);
   const formData = new FormData();
   formData.append("name", newAdvert.name);
   formData.append("price", newAdvert.price);
