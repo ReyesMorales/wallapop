@@ -12,13 +12,9 @@ export const getLatestAdverts = () => {
 
 export const getAdvert = (id) => {
   const url = `${advertsUrl}/${id}`;
-  console.log("id en service", id)
+  console.log("id en service", id);
   return client.get(url);
 };
-
-
-
-
 
 export const createAd = (newAdvert) => {
   console.log("Datos a enviar al servidor desde service:", newAdvert);
@@ -31,13 +27,18 @@ export const createAd = (newAdvert) => {
   formData.append("photo", newAdvert.photo);
 
   return client.post(`${advertsUrl}/create-advert`, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-  };
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
 
-  export const editAdvert = (id, updatedAdvert) => {
-    const url = `${advertsUrl}/edit/${id}`;
-    return client.put(url, updatedAdvert);
-  };
+export const editAdvert = (id, updatedAdvert) => {
+  const url = `${advertsUrl}/edit/${id}`;
+  return client.put(url, updatedAdvert);
+};
+
+export const deleteAdvert = (id) => {
+  const url = `${advertsUrl}/${id}`;
+  return client.delete(url);
+};
