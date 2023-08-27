@@ -14,7 +14,6 @@ import { editAdvert } from "./service";
 
 function EditAdForm() {
   const { id } = useParams();
-  console.log("ID obtenido:", id);
 
   const [adData, setAdData] = useState({
     name: "",
@@ -33,8 +32,6 @@ function EditAdForm() {
   useEffect(() => {
     getAdvert(id) // Llama a la función getAdvert del servicio
       .then((data) => {
-        console.log("Data recibida en el componente:", data);
-
         const updatedAdData = {
           name: data.name, 
           price: data.price,
@@ -44,7 +41,6 @@ function EditAdForm() {
           photo: data.photo,
         };
         setAdData(updatedAdData); // Actualiza el estado con los datos del anuncio
-        console.log("Datos del anuncio obtenidos:", data);
       })
       .catch((error) => {
         setErrorMessage(
@@ -53,7 +49,6 @@ function EditAdForm() {
       });
   }, [id]);
 
-  console.log("Estado adData:", adData);
 
   const validateForm = () => {
     const errors = {};
