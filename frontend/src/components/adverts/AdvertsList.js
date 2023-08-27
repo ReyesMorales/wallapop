@@ -24,6 +24,7 @@ const AdvertsList = () => {
     });
   }, []);
   //TODO: el margen izquierdo de las cards desaparece
+
   return (
     <Layout title="Compra y vende cosas de segunda mano">
       <Form>
@@ -48,14 +49,9 @@ const AdvertsList = () => {
         <div className="d-flex justify-content-center">
           <CardGroup>
             {adverts.map((advert) => (
-              <Link
-                to={`/adverts/${advert.id}`}
-                style={{ textDecoration: "none" }}
-                key={advert.id}
-              >
-                <Card style={{ width: "18rem" }} className="mb-5 mx-2">
-                  <Card.Header>{advert.type ? "venta" : 
-                  "compra"}</Card.Header>
+              <Card key={advert._id} 
+                 style={{ width: "18rem" }} className="mb-5 mx-2">
+                  <Card.Header>{advert.type ? "venta" : "compra"}</Card.Header>
                   <Card.Img
                     variant="top"
                     src={advert.photo ? advert.photo : placeholderPhoto}
@@ -76,8 +72,13 @@ const AdvertsList = () => {
                       Etiquetas: {advert.tags}
                     </small>
                   </Card.Footer>
-                </Card>
-               </Link>
+                  <Link
+                    to={`/edit/${advert._id}`}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <Button variant="primary">Editar</Button>
+                  </Link>
+              </Card>
             ))}
           </CardGroup>
         </div>
