@@ -1,20 +1,39 @@
+require("dotenv").config();
+
 var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-var cors = require('cors');
-var app = express();
+var port = process.env.PORT
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 
-// Habilita CORS para todas las solicitudes
-app.use(cors());
-
-
 //conexion a DB
 require("./lib/connectMongoose");
+
+var app = express();
+
+const multer = require("multer");
+
+// Configura Multer para guardar archivos en una carpeta específica
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "public/uploads"); // Carpeta donde se guardarán los archivos
+  },
+  filename: function (req, file, cb) {
+    // Genera un nombre de archivo único basado en la fecha actual
+    cb(null, Date.now() + "-" + file.originalname);
+  },
+});
+
+const upload = multer({ storage: storage });
+
+
+// Usa multer como middleware para manejar las solicitudes que requieren análisis de archivos
+app.use(upload.single("photo")); 
+
 
 
 // view engine setup
@@ -30,7 +49,7 @@ app.use(express.static(path.join(__dirname, "public")));
 /**
  * Rutas del API
  */
-app.use("/api/anuncios", require("./routes/api/anuncios"));
+app.use("/api/adverts", require("./routes/api/adverts"));
 
 /**
  * Rutas del Website
@@ -52,6 +71,10 @@ app.use(function (err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render("error");
+});
+
+app.listen(port, () => {
+  console.log(`Servidor escuchando en el puerto ${port}`);
 });
 
 module.exports = app;

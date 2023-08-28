@@ -1,67 +1,97 @@
 import { useEffect, useState } from "react";
-import { Link } from 'react-router-dom';
-import DeleteAd from './DeleteAd';
 import { getLatestAdverts } from "./service";
+import {
+  Button,
+  Card,
+  CardGroup,
+  Col,
+  Form,
+  ListGroup,
+  Row,
+} from "react-bootstrap";
+import { Link } from "react-router-dom";
+import placeholderPhoto from "../../assets/placeholder.png";
+import Layout from "../Layout/Layout";
+import DeleteAd from './DeleteAd';
 
-function AdvertsList() {
+const AdvertsList = () => {
+  //TODO: dispatch to props
   const [adverts, setAdverts] = useState([]);
 
-  // useEffect(() => {
-  //   // toma la lista de anuncios del backend por axios
-  //   getLatestAdverts().then((adverts) => {
-  //     console.log(adverts)
-  //     setAdverts(adverts);
-  //     })      
-  //     .catch(error => {
-  //       console.error('Error al obtener la lista de anuncios:', error);
-  //     });
-  // }, []);
-
   useEffect(() => {
-    getLatestAdverts()
-      .then((response) => {
-        console.log("response:", response); // Verifica la respuesta completa
-        if (response && response.data) {
-          console.log("response.data:", response.data); // Verifica los datos recibidos
-          setAdverts(response.data);
-        } else {
-          console.error("Respuesta de la API incorrecta:", response);
-        }
-      })
-      .catch((error) => {
-        console.error("Error al obtener la lista de anuncios:", error);
-      });
+    // toma la lista de anuncios del backend por axios
+    getLatestAdverts().then((adverts) => {
+      setAdverts(adverts);
+    });
   }, []);
-  
-  
+  //TODO: el margen izquierdo de las cards desaparece
 
-  const handleDelete = (deletedAdId) => {
-    // Actualizar la lista de anuncios eliminando el anuncio con el ID proporcionado
-    setAdverts(prevAdverts => prevAdverts.filter(advert => advert._id !== deletedAdId));
+  const handleAdDeleted = (deletedId) => {
+    // Refresca la lista de anuncios o quita el anuncio de la lista en el estado
+    setAdverts((prevAdverts) => prevAdverts.filter((advert) => advert._id !== deletedId));
   };
 
   return (
-    <div className="AdvertsList">
-      <h1>Hello ducks!</h1>
-      <ul>
-        {adverts && adverts.map(advert => (
-          <li key={advert._id}>
-            <h3>{advert.title}</h3>
-            <p>{advert.description}</p>
-            {advert.photo && ( 
-        <img
-          src={advert.photo}
-          alt={`Imagen de ${advert.title}`}
-        />
-      )}
-            <Link to={`/editar-anuncio/${advert._id}`}>Editar Anuncio</Link>
-            <DeleteAd id={advert._id} onDelete={handleDelete} />
-          </li>
-        ))}
-      </ul>
-      <Link to="/create-advert">Crear Anuncio</Link>
-
-    </div>
+    <Layout title="Compra y vende cosas de segunda mano">
+      <Form>
+        <Row className="justify-content-center my-5">
+          <Col xs="auto">
+            <Form.Control
+              type="text"
+              placeholder="Buscar en todos los anuncios"
+              className=" mr-sm-2"
+              style={{ width: "600px" }}
+            />
+          </Col>
+          <Col xs="auto">
+            <Button variant="secondary">Buscar</Button>
+          </Col>
+        </Row>
+      </Form>
+      <Link to="/create-advert" style={{ textDecoration: "none" }}>
+        <Button variant="primary">Crear Anuncio</Button>
+      </Link>
+      <div className="AdvertsList">
+        <div className="d-flex justify-content-center">
+          <CardGroup>
+            {adverts.map((advert) => (
+              <Card
+                key={advert._id}
+                style={{ width: "18rem" }}
+                className="mb-5 mx-2"
+              >
+                <Card.Header>{advert.type ? "venta" : "compra"}</Card.Header>
+                <Card.Img
+                  variant="top"
+                  src={advert.photo ? advert.photo : placeholderPhoto}
+                />
+                <Card.Body>
+                  <Card.Title>{advert.name}</Card.Title>
+                  <Card.Text>{advert.description}</Card.Text>
+                  <ListGroup variant="flush" bg="primary">
+                    <ListGroup.Item>
+                      {advert.type === "compra"
+                        ? `Compra por: ${advert.price}€`
+                        : `Venta por: ${advert.price}€`}
+                    </ListGroup.Item>
+                  </ListGroup>
+                </Card.Body>
+                <Card.Footer>
+                  <small className="text-muted">Etiquetas: {advert.tags}</small>
+                </Card.Footer>
+                <Link
+                  to={`/edit/${advert._id}`}
+                  style={{ textDecoration: "none" }}
+                >
+                  <Button variant="primary">Editar</Button>
+                </Link>
+                <DeleteAd onAdDeleted={handleAdDeleted} id={advert._id} />
+              </Card>
+            ))}
+          </CardGroup>
+        </div>
+      </div>
+    </Layout>
   );
 };
 
