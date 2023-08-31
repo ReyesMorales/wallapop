@@ -7,7 +7,9 @@ function Header() {
     <Navbar bg="dark" data-bs-theme="dark" expand="lg">
       <Container>
         <Navbar.Brand href="#home">
-          <Logo /> What a Duck!
+        <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}> 
+            <Logo /> What a Duck!
+          </Link> 
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
