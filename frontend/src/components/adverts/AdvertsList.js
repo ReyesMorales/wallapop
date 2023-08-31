@@ -65,7 +65,8 @@ const AdvertsList = () => {
         </Form>
         {!!adverts.length ? (
           <>
-            <Link
+            <Button
+              as={Link}
               to="/create-advert"
               style={{
                 textDecoration: "none",
@@ -73,9 +74,11 @@ const AdvertsList = () => {
                 top: "110px",
                 right: "140px",
               }}
+              variant="dark"
             >
-              <Button variant="dark">Crear Anuncio</Button>
-            </Link>
+              Crear Anuncio
+            </Button>
+
             <div className="AdvertsList">
               <div className="d-flex justify-content-center">
                 <CardGroup>
