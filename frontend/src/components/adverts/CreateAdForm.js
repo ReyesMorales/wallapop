@@ -123,7 +123,7 @@ function CreateAdForm() {
               <Button variant="secondary" onClick={handleCancel}>
                 Cancelar
               </Button>
-              <Button variant="primary" onClick={handleConfirm}>
+              <Button variant="dark" onClick={handleConfirm}>
                 Aceptar
               </Button>
             </Modal.Footer>
@@ -215,7 +215,7 @@ function CreateAdForm() {
               />
             </Form.Group>
 
-            <Button variant="primary" type="submit">
+            <Button variant="dark" type="submit">
               Crear Anuncio
             </Button>
           </Form>
