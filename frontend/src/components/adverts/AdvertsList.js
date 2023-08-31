@@ -12,7 +12,7 @@ import {
 import { Link } from "react-router-dom";
 import placeholderPhoto from "../../assets/placeholder.png";
 import Layout from "../Layout/Layout";
-import DeleteAd from './DeleteAd';
+import DeleteAd from "./DeleteAd";
 
 const AdvertsList = () => {
   //TODO: dispatch to props
@@ -28,7 +28,9 @@ const AdvertsList = () => {
 
   const handleAdDeleted = (deletedId) => {
     // Refresca la lista de anuncios o quita el anuncio de la lista en el estado
-    setAdverts((prevAdverts) => prevAdverts.filter((advert) => advert._id !== deletedId));
+    setAdverts((prevAdverts) =>
+      prevAdverts.filter((advert) => advert._id !== deletedId)
+    );
   };
 
   return (
@@ -48,15 +50,15 @@ const AdvertsList = () => {
           </Col>
         </Row>
       </Form>
-      <Link 
-      to="/create-advert" 
-      style={{ 
-        textDecoration: "none", 
-        position: "absolute", 
-        top: "110px", 
-        right: "140px"
-      }}
-    >
+      <Link
+        to="/create-advert"
+        style={{
+          textDecoration: "none",
+          position: "absolute",
+          top: "110px",
+          right: "140px",
+        }}
+      >
         <Button variant="dark">Crear Anuncio</Button>
       </Link>
       <div className="AdvertsList">
@@ -68,7 +70,7 @@ const AdvertsList = () => {
                 style={{ width: "18rem" }}
                 className="mb-5 mx-2"
               >
-                <Card.Header>{advert.type ? "venta" : "compra"}</Card.Header>
+                <Card.Header>{advert.type}</Card.Header>
                 <Card.Img
                   variant="top"
                   src={advert.photo ? advert.photo : placeholderPhoto}
