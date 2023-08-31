@@ -48,8 +48,16 @@ const AdvertsList = () => {
           </Col>
         </Row>
       </Form>
-      <Link to="/create-advert" style={{ textDecoration: "none" }}>
-        <Button variant="primary">Crear Anuncio</Button>
+      <Link 
+      to="/create-advert" 
+      style={{ 
+        textDecoration: "none", 
+        position: "absolute", 
+        top: "110px", 
+        right: "140px"
+      }}
+    >
+        <Button variant="dark">Crear Anuncio</Button>
       </Link>
       <div className="AdvertsList">
         <div className="d-flex justify-content-center">
@@ -61,10 +69,7 @@ const AdvertsList = () => {
                 className="mb-5 mx-2"
               >
                 <Card.Header>{advert.type ? "venta" : "compra"}</Card.Header>
-                <Card.Img
-                  variant="top"
-                  src={advert.photo ? advert.photo : placeholderPhoto}
-                />
+                <Card.Img variant="top" src={advert.photo ? `${process.env.REACT_APP_API_BASE_URL}/uploads/${advert.photo}` : placeholderPhoto} />
                 <Card.Body>
                   <Card.Title>{advert.name}</Card.Title>
                   <Card.Text>{advert.description}</Card.Text>
@@ -83,7 +88,7 @@ const AdvertsList = () => {
                   to={`/edit/${advert._id}`}
                   style={{ textDecoration: "none" }}
                 >
-                  <Button variant="primary">Editar</Button>
+                  <Button variant="dark">Editar</Button>
                 </Link>
                 <DeleteAd onAdDeleted={handleAdDeleted} id={advert._id} />
               </Card>

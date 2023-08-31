@@ -9,6 +9,7 @@ import {
   Modal,
 } from "react-bootstrap";
 import { createAd } from "./service"; 
+import Layout from "../Layout/Layout";
 
 
 function CreateAdForm() {
@@ -108,7 +109,8 @@ function CreateAdForm() {
   // Lógica para manejar el envío del formulario y crear el anuncio
 
   return (
-    <Container>
+    <Layout title="Crear Anuncio">
+    <Container className="mb-5">
       <Row className="justify-content-md-center">
         <Col md="6">
           {/*Modal de confirmación */}
@@ -123,7 +125,7 @@ function CreateAdForm() {
               <Button variant="secondary" onClick={handleCancel}>
                 Cancelar
               </Button>
-              <Button variant="primary" onClick={handleConfirm}>
+              <Button variant="dark" onClick={handleConfirm}>
                 Aceptar
               </Button>
             </Modal.Footer>
@@ -215,13 +217,14 @@ function CreateAdForm() {
               />
             </Form.Group>
 
-            <Button variant="primary" type="submit">
-              Crear Anuncio
+            <Button variant="dark" type="submit" className="mt-3">
+              Crear
             </Button>
           </Form>
         </Col>
       </Row>
     </Container>
+    </Layout>
   );
 }
 
