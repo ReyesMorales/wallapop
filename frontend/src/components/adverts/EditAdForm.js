@@ -9,8 +9,8 @@ import {
   Modal,
 } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import { getAdvert } from "./service";
-import { editAdvert } from "./service";
+import { getAdvert, editAdvert } from "./service";
+import Layout from "../Layout/Layout";
 
 function EditAdForm() {
   const { id } = useParams();
@@ -107,7 +107,8 @@ function EditAdForm() {
   };
 
   return (
-    <Container>
+    <Layout title="Editar Anuncio">
+    <Container className="mb-5">
       <Row className="justify-content-md-center">
         <Col md="6">
           <Modal show={showModal} onHide={handleCancel}>
@@ -207,13 +208,14 @@ function EditAdForm() {
               )}
             </Form.Group>
 
-            <Button variant="dark" type="submit">
+            <Button variant="dark" type="submit" style={{ marginTop: "20px" }}>
               Guardar Cambios
             </Button>
           </Form>
         </Col>
       </Row>
     </Container>
+    </Layout>
   );
 }
 
