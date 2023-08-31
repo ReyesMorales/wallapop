@@ -5,7 +5,6 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-var port = process.env.PORT
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -30,11 +29,8 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-
 // Usa multer como middleware para manejar las solicitudes que requieren análisis de archivos
-app.use(upload.single("photo")); 
-
-
+app.use(upload.single("photo"));
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -71,10 +67,6 @@ app.use(function (err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render("error");
-});
-
-app.listen(port, () => {
-  console.log(`Servidor escuchando en el puerto ${port}`);
 });
 
 module.exports = app;
