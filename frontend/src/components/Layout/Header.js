@@ -6,10 +6,8 @@ function Header() {
   return (
     <Navbar bg="dark" data-bs-theme="dark" expand="lg">
       <Container>
-        <Navbar.Brand href="#home">
-        <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}> 
-            <Logo /> What a Duck!
-          </Link> 
+        <Navbar.Brand href="/">
+        <Logo /> What a Duck!
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
