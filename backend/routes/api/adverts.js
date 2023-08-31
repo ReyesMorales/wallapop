@@ -1,10 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const cors = require("cors");
-//carga del modelo de anuncio
 const Advert = require("../../models/Advert.js");
+const upload = require('../../config/multerConfig');
 
-router.use(cors());
+
+router.use(cors({
+  origin: 'http://localhost:3000', 
+  credentials: true
+}));
 
 // GET /api/adverts
 router.get("/", async (req, res, next) => {
@@ -32,15 +36,16 @@ router.get("/:id", async (req, res, next) => {
 
 // Ruta para crear un nuevo anuncio
 router.post("/create-advert", 
-// upload.single('photo'), 
+upload.single('photo'), 
 async (req, res, next) => {
   try {
     console.log("Datos enviados desde el frontend:", req.body);
     // Obtener los datos del anuncio desde el cuerpo de la solicitud
-    const { name, price, description, type, tags, photo } = req.body;
+    const { name, price, description, type, tags } = req.body;
 
     // Obtener el nombre del archivo del campo de "foto" cargado
-    // const photo = req.file.filename;
+    const photoFilename = req.file.filename;
+
 
     // Crear un objeto con los datos del anuncio
     const newAdvert = new Advert({
@@ -49,7 +54,7 @@ async (req, res, next) => {
       description,
       type,
       tags,
-      photo,
+      photo: photoFilename,
     });
 
     // Guardar el anuncio en la base de datos
