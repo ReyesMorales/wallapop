@@ -92,7 +92,11 @@ const AdvertsList = () => {
                       <Link to={`/detail/${advert._id}`}>
                         <Card.Img
                           variant="top"
-                          src={advert.photo ? advert.photo : placeholderPhoto}
+                          src={
+                            advert.photo
+                              ? `${process.env.REACT_APP_API_BASE_URL}/uploads/${advert.photo}`
+                              : placeholderPhoto
+                          }
                         />
                       </Link>
                       <Card.Body>
