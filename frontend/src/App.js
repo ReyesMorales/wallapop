@@ -10,8 +10,9 @@ import {
 } from "react-router-dom";
 
 const AdvertsList = lazy(() => import("./components/adverts/AdvertsList"));
+const AdvertDetail = lazy(() => import("./components/adverts/AdvertDetail"));
 const CreateAdForm = lazy(() => import("./components/adverts/CreateAdForm"));
-const EditAdForm = lazy(() => import('./components/adverts/EditAdForm'));
+const EditAdForm = lazy(() => import("./components/adverts/EditAdForm"));
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
             <Route path="/adverts" element={<AdvertsList />} />
+            <Route path="/detail/:advertId" element={<AdvertDetail />} />
             <Route path="/" element={<Navigate to="/adverts" />} />
             <Route path="/create-advert" element={<CreateAdForm />} />
             <Route path="/edit/:id" element={<EditAdForm />} />
@@ -31,5 +33,3 @@ function App() {
 }
 
 export default App;
-
-
