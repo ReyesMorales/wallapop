@@ -1,25 +1,36 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import AdList from "./components/AdList";
-import CreateAdForm from "./components/CreateAdForm";
-import EditAdForm from "./components/EditAdForm";
-import Login from "./components/login";
-import VerifyEmail from "./components/verify-email";
+import "bootstrap/dist/css/bootstrap.min.css";
+
+import "./App.css";
+import { Suspense, lazy } from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
+
+const AdvertsList = lazy(() => import("./components/adverts/AdvertsList"));
+const CreateAdForm = lazy(() => import("./components/adverts/CreateAdForm"));
+const EditAdForm = lazy(() => import("./components/adverts/EditAdForm"));
+const LoginForm = lazy(() => import("./components/auth/LoginForm"));
+const Register = lazy(() => import("./components/auth/register"));
 
 function App() {
   return (
-    <div>
-      <h1>WallaClone</h1>
-      <Router>
-        <Routes>
-          <Route path="/lista-anuncios" element={<AdList />} />
-          <Route path="/crear-anuncio" element={<CreateAdForm />} />
-          <Route path="/editar-anuncio/:id" element={<EditAdForm />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/verify-email" element={<VerifyEmail />} />
-        </Routes>
-      </Router>
-    </div>
+    <Router>
+      <div className="App">
+        <Suspense fallback={<div>Loading...</div>}>
+          <Routes>
+            <Route path="/adverts" element={<AdvertsList />} />
+            <Route path="/login" element={<LoginForm />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/" element={<Navigate to="/adverts" />} />
+            <Route path="/create-advert" element={<CreateAdForm />} />
+            <Route path="/edit/:id" element={<EditAdForm />} />
+          </Routes>
+        </Suspense>
+      </div>
+    </Router>
   );
 }
 
