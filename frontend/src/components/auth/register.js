@@ -214,7 +214,7 @@ function CreateRegister() {
             <br />
             <p>
               ¿Ya tienes una cuenta creada?{" "}
-              <Link to="/register" style={{ textDecoration: "none" }}>
+              <Link to="/login" style={{ textDecoration: "none" }}>
                 Inicia Sesión
               </Link>
             </p>

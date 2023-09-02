@@ -21,6 +21,18 @@ export const createUser = (newUser) => {
   });
 };
 
+export const Login = (LoginForm) => {
+  const formData = new FormData();
+  formData.append("email", LoginForm.email);
+  formData.append("password", LoginForm.password);
+
+  return client.post(`${registerUrl}/login`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
+
 export const createAd = (newAdvert) => {
   const formData = new FormData();
   formData.append("name", newAdvert.name);

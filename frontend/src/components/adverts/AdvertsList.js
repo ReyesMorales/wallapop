@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getLatestAdverts } from "./service";
+import axios from "axios";
 import {
   Button,
   Card,
@@ -12,7 +13,7 @@ import {
 import { Link } from "react-router-dom";
 import placeholderPhoto from "../../assets/placeholder.png";
 import Layout from "../Layout/Layout";
-import DeleteAd from './DeleteAd';
+import DeleteAd from "./DeleteAd";
 
 const AdvertsList = () => {
   //TODO: dispatch to props
@@ -28,7 +29,9 @@ const AdvertsList = () => {
 
   const handleAdDeleted = (deletedId) => {
     // Refresca la lista de anuncios o quita el anuncio de la lista en el estado
-    setAdverts((prevAdverts) => prevAdverts.filter((advert) => advert._id !== deletedId));
+    setAdverts((prevAdverts) =>
+      prevAdverts.filter((advert) => advert._id !== deletedId)
+    );
   };
 
   return (
@@ -50,6 +53,12 @@ const AdvertsList = () => {
       </Form>
       <Link to="/create-advert" style={{ textDecoration: "none" }}>
         <Button variant="primary">Crear Anuncio</Button>
+      </Link>
+      <br />
+      <br />
+
+      <Link to="http://localhost:4000/logout">
+        <Button variant="secondary">Cerrar Sesion</Button>
       </Link>
       <div className="AdvertsList">
         <div className="d-flex justify-content-center">

@@ -1,5 +1,6 @@
 import axios from "axios";
 
+axios.defaults.withCredentials = true;
 /**
  * creacion del cliente de axios para llamar al backend
  */
@@ -15,6 +16,5 @@ client.interceptors.response.use((response) => {
   }
   return response.data;
 });
-
 
 export default client;

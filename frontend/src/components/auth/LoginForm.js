@@ -8,8 +8,9 @@ import {
   Alert,
   Modal,
 } from "react-bootstrap";
-import { createAd } from "./service";
+// import { createAd } from "./service";
 import { Link } from "react-router-dom";
+import { Login } from "./service";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
@@ -58,23 +59,24 @@ function LoginForm() {
     // Cerrar el Modal de confirmación
     setShowModal(false);
 
-    const newAdvert = {
+    const loginForm = {
       email: email,
       password: password,
     };
-    console.log("Datos a enviar al servidor:", newAdvert);
+    console.log("Datos a enviar al servidor:", loginForm);
 
     // Realizar la petición POST al backend
     try {
-      await createAd(newAdvert); // Llama a la función de la API
-      setSuccessMessage("Anuncio creado con éxito");
+      await Login(loginForm); // Llama a la función de la API
+      setSuccessMessage("Login hecho con éxito, bienvenido de vuelta");
       setErrorMessage("");
       setEmail("");
       setPassword("");
+      window.location.href = "http://localhost:3000/adverts";
     } catch (error) {
       // Si ocurre un error, establecer el mensaje de error y limpiar el mensaje de éxito
       setErrorMessage(
-        "Error al crear el anuncio. Por favor, inténtalo de nuevo."
+        "Error al iniciar sesion. Por favor, inténtalo de nuevo."
       );
       setSuccessMessage("");
     }
