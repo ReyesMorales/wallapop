@@ -6,11 +6,27 @@ const Advert = require("../../models/Advert.js");
 const User = require("../../models/User.js");
 const bcrypt = require("bcrypt");
 const crypto = require("crypto");
+const cookie = require("cookie-parser");
+const { loginrequired } = require("../../config/JWT.js");
 
-router.use(cors());
+//Para el Token y la Cookie
+require("dotenv").config();
+const jwt = require("jsonwebtoken");
+
+const createToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET);
+};
+
+router.use(
+  cors({
+    origin: ["http://localhost:3000"],
+    methods: ["POST", "GET"],
+    credentials: true,
+  })
+);
 
 // GET /api/adverts
-router.get("/", async (req, res, next) => {
+router.get("/", loginrequired, async (req, res, next) => {
   try {
     const adverts = await Advert.find();
     res.json({ results: adverts });
@@ -124,6 +140,35 @@ router.post(
     }
   }
 );
+
+router.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const findUser = await User.findOne({ email: email });
+    if (findUser) {
+      const match = await bcrypt.compare(password, findUser.password);
+      if (match) {
+        console.log("Sesion iniciada correctamente. Bien hecho");
+        //Crear token
+        const token = createToken(findUser.id);
+        console.log("El token de acceso es: ", token);
+        res.cookie("access-token", token);
+        // Responder al cliente con un mensaje de éxito
+        res.status(201).json({ mensaje: "Log In creado con éxito" });
+      } else {
+        console.log("Contraseña Invalida");
+      }
+    } else {
+      console.log("No se ha encontrado el usuario");
+    }
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+router.get("/logout", (req, res) => {
+  res.clearCookie("access-token");
+});
 
 // Ruta para editar un anuncio por ID
 router.put("/edit/:id", async (req, res, next) => {

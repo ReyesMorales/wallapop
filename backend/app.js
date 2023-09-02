@@ -59,6 +59,11 @@ app.get("/", (req, res) => {
   res.send("¡El servidor backend está funcionando!");
 });
 
+//Cerrar Sesion
+app.get("/logout", (req, res) => {
+  res.clearCookie("access-token");
+  res.redirect("http://localhost:3000/");
+});
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
