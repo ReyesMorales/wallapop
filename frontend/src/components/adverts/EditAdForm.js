@@ -9,8 +9,10 @@ import {
   Modal,
 } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import { getAdvert, editAdvert } from "./service";
+import { getAdvert } from "./service";
+import { editAdvert } from "./service";
 import Layout from "../Layout/Layout";
+
 
 function EditAdForm() {
   const { id } = useParams();
@@ -122,6 +124,7 @@ function EditAdForm() {
               <Button variant="secondary" onClick={handleCancel}>
                 Cancelar
               </Button>
+
               <Button variant="dark" onClick={handleConfirm}>
                 Aceptar
               </Button>

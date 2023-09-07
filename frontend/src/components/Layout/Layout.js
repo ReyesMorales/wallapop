@@ -2,6 +2,7 @@ import Header from "./Header";
 
 const Layout = ({ title, children }) => {
   return (
+
     <div className="position-relative">
       <Header />
       <main>

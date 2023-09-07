@@ -125,6 +125,7 @@ function CreateAdForm() {
               <Button variant="secondary" onClick={handleCancel}>
                 Cancelar
               </Button>
+
               <Button variant="dark" onClick={handleConfirm}>
                 Aceptar
               </Button>
