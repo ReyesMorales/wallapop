@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Button, Modal, Alert } from 'react-bootstrap';
 import { deleteAdvert } from './service'; 
 import { useNavigate } from 'react-router-dom';
 
@@ -39,6 +40,7 @@ function DeleteAd({ id, onAdDeleted }) {
       )}
       {showSuccessMessage && <p>Anuncio borrado con éxito</p>}
       {errorMessage && <p className="error-message">{errorMessage}</p>}
+
     </div>
   );
 }

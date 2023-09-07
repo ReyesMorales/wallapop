@@ -14,16 +14,30 @@ import placeholderPhoto from "../../assets/placeholder.png";
 import Layout from "../Layout/Layout";
 import DeleteAd from "./DeleteAd";
 
+
 const AdvertsList = () => {
   //TODO: dispatch to props
   const [adverts, setAdverts] = useState([]);
   const [query, setQuery] = useState("");
+
+const EmptyList = () => {
+  return (
+    <div>
+      <h3>Todavía no hay anuncios, publica el primero!</h3>
+      <Button as={Link} variant="dark" to="/create-advert">
+        Crear Anuncio
+      </Button>
+    </div>
+  );
+};
+
   useEffect(() => {
     // toma la lista de anuncios del backend por axios
     getLatestAdverts().then((adverts) => {
       setAdverts(adverts);
     });
   }, []);
+
   //TODO: el margen izquierdo de las cards desaparece
 
   const handleAdDeleted = (deletedId) => {
@@ -108,6 +122,7 @@ const AdvertsList = () => {
             ))}
           </CardGroup>
         </div>
+
       </div>
     </Layout>
   );
