@@ -64,6 +64,7 @@ app.get("/uploads/:imageName", (req, res) => {
  * Rutas del API
  */
 app.use("/api/adverts", require("./routes/api/adverts"));
+app.use("/api/users", require("./routes/api/users"));
 
 /**
  * Rutas del Website
