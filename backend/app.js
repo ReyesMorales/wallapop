@@ -6,7 +6,6 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-var port = 4000;
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -118,9 +117,5 @@ app.use(function (req, res, next) {
 //   res.status(err.status || 500);
 //   res.render("error");
 // });
-
-app.listen(port, () => {
-  console.log(`Servidor escuchando en el puerto ${port}`);
-});
 
 module.exports = app;
