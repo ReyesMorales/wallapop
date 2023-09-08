@@ -59,9 +59,10 @@ router.post(
         const findUser = await User.findOne({ email: email });
         if (findUser) {
           console.log("El correo ya esta registrado en la Base de datos");
-          res.status(500).json({
+          res.status(409).json({
             mensaje: "El correo ya esta registrado en la Base de datos.",
           });
+
         } else {
           const salt = await bcrypt.genSalt(10);
           const hashPassword = await bcrypt.hash(newUser.password, salt);
