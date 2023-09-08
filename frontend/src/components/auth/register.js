@@ -37,10 +37,10 @@ function CreateRegister() {
       errors.name = "El nombre es obligatorio";
     }
     if (!number) {
-      errors.price = "El número telefonico es obligatorio";
+      errors.number = "El número telefonico es obligatorio";
     }
     if (!email) {
-      errors.price = "El correo electronico es obligatorio";
+      errors.email = "El correo electronico es obligatorio";
     }
     if (!password) {
       errors.password = "La contraseña es obligatoria";
