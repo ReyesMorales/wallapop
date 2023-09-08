@@ -1,14 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const cors = require("cors");
-
-//carga del modelo de anuncio
 const Advert = require("../../models/Advert.js");
-const User = require("../../models/User.js");
-const bcrypt = require("bcrypt");
-const crypto = require("crypto");
 const cookie = require("cookie-parser");
-const { loginrequired } = require("../../config/JWT.js");
+const upload = require('../../config/multerConfig');
+// const { loginrequired } = require("../../config/JWT.js");
 
 router.use(
   cors({
@@ -19,19 +15,20 @@ router.use(
 );
 
 // GET /api/adverts
-router.get("/",
-//  loginrequired, 
- async (req, res, next) => {
-  try {
-    const adverts = await Advert.find();
-    res.json({ results: adverts });
-    console.log(token2);
-
-  } catch (error) {
-    console.log(error); //TODO:BORRAR cuando dev termine
-    next(error);
+router.get(
+  "/",
+  //  loginrequired,
+  async (req, res, next) => {
+    try {
+      const adverts = await Advert.find();
+      res.json({ results: adverts });
+      console.log(token2);
+    } catch (error) {
+      console.log(error); //TODO:BORRAR cuando dev termine
+      next(error);
+    }
   }
-});
+);
 
 // Ruta para obtener un anuncio por ID
 router.get("/:id", async (req, res, next) => {
@@ -49,7 +46,7 @@ router.get("/:id", async (req, res, next) => {
 // Ruta para crear un nuevo anuncio
 router.post(
   "/create-advert",
-   upload.single('photo'),
+  upload.single("photo"),
   async (req, res, next) => {
     try {
       console.log("Datos enviados desde el frontend:", req.body);
@@ -89,7 +86,6 @@ router.post(
     }
   }
 );
-
 
 // Ruta para editar un anuncio por ID
 router.put("/edit/:id", async (req, res, next) => {
@@ -133,6 +129,5 @@ router.delete("/:id", async (req, res, next) => {
     next(error);
   }
 });
-
 
 module.exports = router;
