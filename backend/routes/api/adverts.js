@@ -56,8 +56,13 @@ router.post(
       // Obtener los datos del anuncio desde el cuerpo de la solicitud
       const { name, price, description, type, tags } = req.body;
 
-      // Obtener el nombre del archivo del campo de "foto" cargado
-       const photoFilename = req.file.filename;
+      // Comprobar si se ha cargado una foto
+      let photoFilename;
+      if (req.file) {
+        photoFilename = req.file.filename;
+      } else {
+        photoFilename = ""; // Puedes dejar esto en blanco o poner un valor predeterminado
+      }
 
       // Crear un objeto con los datos del anuncio
       const newAdvert = new Advert({
