@@ -20,16 +20,16 @@ const AdvertsList = () => {
   const [adverts, setAdverts] = useState([]);
   const [query, setQuery] = useState("");
 
-const EmptyList = () => {
-  return (
-    <div>
-      <h3>Todavía no hay anuncios, publica el primero!</h3>
-      <Button as={Link} variant="dark" to="/create-advert">
-        Crear Anuncio
-      </Button>
-    </div>
-  );
-};
+// const EmptyList = () => {
+//   return (
+//     <div>
+//       <h3>Todavía no hay anuncios, publica el primero!</h3>
+//       <Button as={Link} variant="dark" to="/create-advert">
+//         Crear Anuncio
+//       </Button>
+//     </div>
+//   );
+// };
 
   useEffect(() => {
     // toma la lista de anuncios del backend por axios
@@ -93,10 +93,7 @@ const EmptyList = () => {
                 className="mb-5 mx-2"
               >
                 <Card.Header>{advert.type ? "venta" : "compra"}</Card.Header>
-                <Card.Img
-                  variant="top"
-                  src={advert.photo ? advert.photo : placeholderPhoto}
-                />
+                <Card.Img variant="top" src={advert.photo ? `${process.env.REACT_APP_API_BASE_URL}/uploads/${advert.photo}` : placeholderPhoto} />
                 <Card.Body>
                   <Card.Title>{advert.name}</Card.Title>
                   <Card.Text>{advert.description}</Card.Text>
