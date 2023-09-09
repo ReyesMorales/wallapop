@@ -73,7 +73,7 @@ const AdvertsList = () => {
       </Form>
 
       <Link to="/create-advert" style={{ textDecoration: "none" }}>
-        <Button variant="primary">Crear Anuncio</Button>
+        <Button variant="dark">Crear Anuncio</Button>
       </Link>
       <br />
       <br />
@@ -97,7 +97,7 @@ const AdvertsList = () => {
                 <Card.Body>
                   <Card.Title>{advert.name}</Card.Title>
                   <Card.Text>{advert.description}</Card.Text>
-                  <ListGroup variant="flush" bg="primary">
+                  <ListGroup variant="flush" bg="dark">
                     <ListGroup.Item>
                       {advert.type === "compra"
                         ? `Compra por: ${advert.price}€`
@@ -112,7 +112,7 @@ const AdvertsList = () => {
                   to={`/edit/${advert._id}`}
                   style={{ textDecoration: "none" }}
                 >
-                  <Button variant="primary">Editar</Button>
+                  <Button variant="dark">Editar</Button>
                 </Link>
                 <DeleteAd onAdDeleted={handleAdDeleted} id={advert._id} />
               </Card>
