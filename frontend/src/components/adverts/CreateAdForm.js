@@ -113,18 +113,8 @@ function CreateAdForm() {
     setShowModal(false);
   };
 
-
-  // Lógica para manejar el envío del formulario y crear el anuncio
-
-  return (
-    <Layout title="Crear Anuncio">
-    <Container className="mb-5">
-      <Row className="justify-content-md-center">
-        <Col md="6">
-        {!redirectToHome ? (
-              <>
-          {/*Modal de confirmación */}
-          <Modal show={showModal} onHide={handleCancel}>
+  const ModalConfirm = () => (
+    <Modal show={showModal} onHide={handleCancel}>
             <Modal.Header closeButton>
             <Modal.Title>Confirmar</Modal.Title>
             </Modal.Header>
@@ -141,6 +131,19 @@ function CreateAdForm() {
               </Button>
             </Modal.Footer>
           </Modal>
+  )
+
+  // Lógica para manejar el envío del formulario y crear el anuncio
+
+  return (
+    <Layout title="Crear Anuncio">
+    <Container className="mb-5">
+      <Row className="justify-content-md-center">
+        <Col md="6">
+        {!redirectToHome ? (
+              <>
+          <ModalConfirm />
+          
 
           {/*Alert para mostrar el mensaje de éxito */}
           {successMessage && <Alert variant="success">{successMessage}</Alert>}
