@@ -11,6 +11,7 @@ import {
 import { createUser } from "./service";
 import { Link } from "react-router-dom";
 import Layout from "../Layout/Layout";
+import RedirectToHome from "../RedirectToHome";
 
 function CreateRegister() {
   const [name, setName] = useState("");
@@ -30,6 +31,9 @@ function CreateRegister() {
 
   // Estado para controlar la visibilidad del Modal
   const [showModal, setShowModal] = useState(false);
+
+  const [redirectToHome, setRedirectToHome] = useState(false);
+
 
   const validateForm = () => {
     const errors = {};
@@ -86,6 +90,7 @@ function CreateRegister() {
       setNumber("");
       setEmail("");
       setPassword("");
+      setRedirectToHome(true);
     } catch (error) {
       // Si ocurre un error, establecer el mensaje de error y limpiar el mensaje de éxito
       setErrorMessage(
@@ -107,6 +112,8 @@ function CreateRegister() {
       <Container>
         <Row className="justify-content-md-center">
           <Col md="6">
+          {!redirectToHome ? (
+            <>
             {/*Modal de confirmación */}
             <Modal show={showModal} onHide={handleCancel}>
               <Modal.Header closeButton>
@@ -225,6 +232,10 @@ function CreateRegister() {
                 </Link>
               </p>
             </Form>
+            </>
+          ) : (
+            <RedirectToHome />
+          )}
           </Col>
         </Row>
       </Container>
