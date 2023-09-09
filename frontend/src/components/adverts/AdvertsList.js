@@ -96,6 +96,7 @@ const AdvertsList = () => {
       </Form>
       {!!adverts.length ? (
         <>
+        {username && (
           <Link
             to="/create-advert"
             style={{
@@ -107,6 +108,7 @@ const AdvertsList = () => {
           >
             <Button variant="dark">Crear Anuncio</Button>
           </Link>
+        )}
           <br />
           <br />
           <div className="AdvertsList">
