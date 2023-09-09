@@ -22,7 +22,6 @@ router.get(
     try {
       const adverts = await Advert.find();
       res.json({ results: adverts });
-      console.log(token2);
     } catch (error) {
       console.log(error); //TODO:BORRAR cuando dev termine
       next(error);
