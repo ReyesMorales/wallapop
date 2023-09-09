@@ -12,6 +12,7 @@ import { useParams } from "react-router-dom";
 import { getAdvert } from "./service";
 import { editAdvert } from "./service";
 import Layout from "../Layout/Layout";
+import RedirectToHome from "../RedirectToHome";
 
 
 function EditAdForm() {
@@ -30,6 +31,8 @@ function EditAdForm() {
   const [errorMessage, setErrorMessage] = useState("");
   const [formErrors, setFormErrors] = useState({});
   const [showModal, setShowModal] = useState(false);
+  const [redirectToHome, setRedirectToHome] = useState(false);
+
 
   useEffect(() => {
     getAdvert(id) // Llama a la función getAdvert del servicio
@@ -87,6 +90,9 @@ function EditAdForm() {
       .then(() => {
         setSuccessMessage("Anuncio editado con éxito");
         setErrorMessage("");
+        setTimeout(() => {
+          setRedirectToHome(true);
+        }, 2000); // esperamos 2 segundos antes de redirigir
       })
       .catch(() => {
         setErrorMessage(
@@ -113,6 +119,8 @@ function EditAdForm() {
     <Container className="mb-5">
       <Row className="justify-content-md-center">
         <Col md="6">
+        {!redirectToHome ? (
+            <>
           <Modal show={showModal} onHide={handleCancel}>
             <Modal.Header closeButton>
               <Modal.Title>Confirmar</Modal.Title>
@@ -215,6 +223,10 @@ function EditAdForm() {
               Guardar Cambios
             </Button>
           </Form>
+          </>
+          ) : (
+            <RedirectToHome />
+          )}
         </Col>
       </Row>
     </Container>
