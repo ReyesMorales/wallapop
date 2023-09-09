@@ -111,7 +111,7 @@ function CreateRegister() {
               <Modal.Title>Confirmar</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              ¿Estás seguro de que deseas crear el anuncio?
+              ¿Estás seguro de que deseas crear el usuario?
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={handleCancel}>
