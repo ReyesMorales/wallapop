@@ -179,7 +179,7 @@ function CreateRegister() {
             <Form.Group controlId="formPrice">
               <Form.Label>Número de telefono:</Form.Label>
               <Form.Control
-                type="number"
+                type="tel"
                 placeholder="Ingresa tu numero de contacto"
                 value={number}
                 onChange={(e) => setNumber(e.target.value)}
