@@ -79,7 +79,7 @@ function CreateRegister() {
     // Realizar la petición POST al backend
     try {
       await createUser(newUser); // Llama a la función de la API
-      setSuccessMessage("Anuncio creado con éxito");
+      setSuccessMessage("Usuario creado con éxito");
       setErrorMessage("");
       setName("");
       setNumber("");
@@ -88,7 +88,7 @@ function CreateRegister() {
     } catch (error) {
       // Si ocurre un error, establecer el mensaje de error y limpiar el mensaje de éxito
       setErrorMessage(
-        "Error al crear el anuncio. Por favor, inténtalo de nuevo."
+        "Error al crear el usuario. Por favor, inténtalo de nuevo."
       );
       setSuccessMessage("");
     }
@@ -99,7 +99,7 @@ function CreateRegister() {
     setShowModal(false);
   };
 
-  // Lógica para manejar el envío del formulario y crear el anuncio
+  // Lógica para manejar el envío del formulario y crear el usuario
 
   return (
     <Container>
