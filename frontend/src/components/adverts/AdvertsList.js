@@ -112,14 +112,16 @@ const AdvertsList = () => {
                     className="mb-5 mx-2"
                   >
                     <Card.Header>{advert.type}</Card.Header>
-                    <Card.Img
-                      variant="top"
-                      src={
-                        advert.photo
-                          ? `${process.env.REACT_APP_API_BASE_URL}/uploads/${advert.photo}`
-                          : placeholderPhoto
-                      }
-                    />
+                    <Link to={`/detail/${advert._id}`}>
+                      <Card.Img
+                        variant="top"
+                        src={
+                          advert.photo
+                            ? `${process.env.REACT_APP_API_BASE_URL}/uploads/${advert.photo}`
+                            : placeholderPhoto
+                        }
+                      />
+                    </Link>
                     <Card.Body>
                       <Card.Title>{advert.name}</Card.Title>
                       <Card.Text>{advert.description}</Card.Text>
