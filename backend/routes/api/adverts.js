@@ -44,8 +44,6 @@ router.get("/", loginrequired, async (req, res, next) => {
   try {
     const adverts = await Advert.find();
     res.json({ results: adverts });
-    console.log(token2);
-
   } catch (error) {
     console.log(error); //TODO:BORRAR cuando dev termine
     next(error);
@@ -230,7 +228,6 @@ router.put("/edit/:id", async (req, res, next) => {
     // Si se actualiza correctamente, devolver el anuncio actualizado
     res.json(updatedAd);
   } catch (error) {
-
     next(error);
   }
 });
@@ -277,6 +274,5 @@ router.delete("/:id", async (req, res, next) => {
     next(error);
   }
 });
-
 
 module.exports = router;
