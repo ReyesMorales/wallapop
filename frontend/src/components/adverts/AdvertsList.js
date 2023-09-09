@@ -18,6 +18,7 @@ const AdvertsList = () => {
   const [adverts, setAdverts] = useState([]);
   const [query, setQuery] = useState("");
 
+
   const EmptyList = () => {
     return (
       <div>
@@ -28,6 +29,7 @@ const AdvertsList = () => {
       </div>
     );
   };
+
 
   useEffect(() => {
     // toma la lista de anuncios del backend por axios

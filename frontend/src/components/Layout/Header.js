@@ -7,7 +7,7 @@ function Header() {
   return (
     <Navbar bg="dark" data-bs-theme="dark" expand="lg">
       <Container>
-        <Navbar.Brand href="#home">
+        <Navbar.Brand href="/">
           <Logo /> What a Duck!
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

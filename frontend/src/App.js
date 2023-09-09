@@ -13,7 +13,7 @@ const AdvertsList = lazy(() => import("./components/adverts/AdvertsList"));
 const CreateAdForm = lazy(() => import("./components/adverts/CreateAdForm"));
 const EditAdForm = lazy(() => import("./components/adverts/EditAdForm"));
 const LoginForm = lazy(() => import("./components/auth/LoginForm"));
-const Register = lazy(() => import("./components/auth/register"));
+const Register = lazy(() => import("./components/auth/Register"));
 const AdvertDetail = lazy(() => import("./components/adverts/AdvertDetail"));
 
 function App() {
