@@ -103,7 +103,7 @@ function CreateRegister() {
   // Lógica para manejar el envío del formulario y crear el usuario
 
   return (
-    <Layout title="Registro">
+    <Layout>
       <Container>
         <Row className="justify-content-md-center">
           <Col md="6">
@@ -119,7 +119,7 @@ function CreateRegister() {
                 <Button variant="secondary" onClick={handleCancel}>
                   Cancelar
                 </Button>
-                <Button variant="primary" onClick={handleConfirm}>
+                <Button variant="dark" onClick={handleConfirm}>
                   Aceptar
                 </Button>
               </Modal.Footer>
@@ -213,7 +213,7 @@ function CreateRegister() {
               </Form.Group>
 
               <br />
-              <Button variant="primary" type="submit">
+              <Button variant="dark" type="submit">
                 Registrarse
               </Button>
               <br />
