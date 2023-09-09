@@ -15,7 +15,6 @@ import Layout from "../Layout/Layout";
 import DeleteAd from "./DeleteAd";
 
 const AdvertsList = () => {
-  //TODO: dispatch to props
   const [adverts, setAdverts] = useState([]);
   const [query, setQuery] = useState("");
 
