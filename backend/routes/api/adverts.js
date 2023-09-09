@@ -26,6 +26,7 @@ router.get(
       console.log(error); //TODO:BORRAR cuando dev termine
       next(error);
     }
+  }
 );
 
 // Ruta para obtener un anuncio por ID
