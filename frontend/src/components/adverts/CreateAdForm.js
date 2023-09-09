@@ -10,6 +10,7 @@ import {
 } from "react-bootstrap";
 import { createAd } from "./service"; 
 import Layout from "../Layout/Layout";
+import RedirectToHome from "../RedirectToHome";
 
 
 function CreateAdForm() {
@@ -31,6 +32,10 @@ function CreateAdForm() {
 
   // Estado para controlar la visibilidad del Modal
   const [showModal, setShowModal] = useState(false);
+
+ // Estado para controlar si la redirección esta activa
+  const [redirectToHome, setRedirectToHome] = useState(false);
+
 
   const validateForm = () => {
     const errors = {};
@@ -69,7 +74,6 @@ function CreateAdForm() {
     // Cerrar el Modal de confirmación
     setShowModal(false);
 
-    
     const newAdvert = {
       name: name,
       price: parseFloat(price),
@@ -92,6 +96,9 @@ function CreateAdForm() {
         setType("compra");        
         setTags("");
         setPhoto("");
+        setTimeout(() => {
+          setRedirectToHome(true);
+        }, 2000); // Espera 2 segundos antes de redirigir      
     } catch(error) {
         // Si ocurre un error, establecer el mensaje de error y limpiar el mensaje de éxito
         setErrorMessage(
@@ -106,6 +113,7 @@ function CreateAdForm() {
     setShowModal(false);
   };
 
+
   // Lógica para manejar el envío del formulario y crear el anuncio
 
   return (
@@ -113,6 +121,8 @@ function CreateAdForm() {
     <Container className="mb-5">
       <Row className="justify-content-md-center">
         <Col md="6">
+        {!redirectToHome ? (
+              <>
           {/*Modal de confirmación */}
           <Modal show={showModal} onHide={handleCancel}>
             <Modal.Header closeButton>
@@ -222,6 +232,10 @@ function CreateAdForm() {
               Crear
             </Button>
           </Form>
+          </>
+            ) : (
+              <RedirectToHome />
+            )}
         </Col>
       </Row>
     </Container>
