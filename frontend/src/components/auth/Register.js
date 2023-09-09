@@ -153,7 +153,7 @@ function CreateRegister() {
                 value={gender}
                 onChange={(e) => setGender(e.target.value)}
               >
-                <option selected disabled>
+                <option value="" disabled>
                   - - - Selecciona tu género - - -
                 </option>
                 <option value="hombre">Hombre</option>
