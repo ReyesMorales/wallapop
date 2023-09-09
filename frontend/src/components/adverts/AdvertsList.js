@@ -18,7 +18,6 @@ const AdvertsList = () => {
   const [adverts, setAdverts] = useState([]);
   const [query, setQuery] = useState("");
 
-
   const EmptyList = () => {
     return (
       <div>
@@ -29,7 +28,6 @@ const AdvertsList = () => {
       </div>
     );
   };
-
 
   useEffect(() => {
     // toma la lista de anuncios del backend por axios
@@ -98,7 +96,15 @@ const AdvertsList = () => {
       </Form>
       {!!adverts.length ? (
         <>
-          <Link to="/create-advert" style={{ textDecoration: "none" }}>
+          <Link
+            to="/create-advert"
+            style={{
+              textDecoration: "none",
+              position: "absolute",
+              top: "110px",
+              right: "140px",
+            }}
+          >
             <Button variant="dark">Crear Anuncio</Button>
           </Link>
           <br />
