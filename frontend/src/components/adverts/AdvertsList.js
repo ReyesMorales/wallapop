@@ -114,7 +114,11 @@ const AdvertsList = () => {
                     <Card.Header>{advert.type}</Card.Header>
                     <Card.Img
                       variant="top"
-                      src={advert.photo ? advert.photo : placeholderPhoto}
+                      src={
+                        advert.photo
+                          ? `${process.env.REACT_APP_API_BASE_URL}/uploads/${advert.photo}`
+                          : placeholderPhoto
+                      }
                     />
                     <Card.Body>
                       <Card.Title>{advert.name}</Card.Title>
