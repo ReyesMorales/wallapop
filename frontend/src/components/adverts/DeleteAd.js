@@ -50,5 +50,6 @@ function DeleteAd({ id, onAdDeleted }) {
   </div>
   );
 }
+    
 
 export default DeleteAd;
