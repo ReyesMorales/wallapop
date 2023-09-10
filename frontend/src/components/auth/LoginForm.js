@@ -1,13 +1,5 @@
 import React, { useState } from "react";
-import {
-  Form,
-  Button,
-  Container,
-  Row,
-  Col,
-  Alert,
-  Modal,
-} from "react-bootstrap";
+import { Form, Button, Container, Row, Col, Alert } from "react-bootstrap";
 // import { createAd } from "./service";
 import { Link } from "react-router-dom";
 import { Login } from "./service";
@@ -24,9 +16,6 @@ function LoginForm() {
 
   // Estado para almacenar mensajes de error de validacion
   const [formErrors, setFormErrors] = useState({});
-
-  // Estado para controlar la visibilidad del Modal
-  const [showModal, setShowModal] = useState(false);
 
   const validateForm = () => {
     const errors = {};
@@ -45,47 +34,33 @@ function LoginForm() {
     return Object.keys(errors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Realiza la validación del formulario antes de enviar la solicitud
     if (validateForm()) {
-      // Mostrar el Modal de confirmación
-      handleConfirm();
-      //setShowModal(true);
+      const loginForm = {
+        email: email,
+        password: password,
+      };
+      console.log("Datos a enviar al servidor:", loginForm);
+
+      // Realizar la petición POST al backend
+      try {
+        await Login(loginForm); // Llama a la función de la API
+        setSuccessMessage("Login hecho con éxito, bienvenido de vuelta");
+        setErrorMessage("");
+        setEmail("");
+        setPassword("");
+        window.location.href = "http://localhost:3000/adverts";
+      } catch (error) {
+        // Si ocurre un error, establecer el mensaje de error y limpiar el mensaje de éxito
+        setErrorMessage(
+          "Error al iniciar sesion. Por favor, inténtalo de nuevo."
+        );
+        setSuccessMessage("");
+      }
     }
-  };
-
-  const handleConfirm = async () => {
-    // Cerrar el Modal de confirmación
-    //setShowModal(false);
-
-    const loginForm = {
-      email: email,
-      password: password,
-    };
-    console.log("Datos a enviar al servidor:", loginForm);
-
-    // Realizar la petición POST al backend
-    try {
-      await Login(loginForm); // Llama a la función de la API
-      setSuccessMessage("Login hecho con éxito, bienvenido de vuelta");
-      setErrorMessage("");
-      setEmail("");
-      setPassword("");
-      window.location.href = "http://localhost:3000/adverts";
-    } catch (error) {
-      // Si ocurre un error, establecer el mensaje de error y limpiar el mensaje de éxito
-      setErrorMessage(
-        "Error al iniciar sesion. Por favor, inténtalo de nuevo."
-      );
-      setSuccessMessage("");
-    }
-  };
-
-  const handleCancel = () => {
-    // Cerrar el Modal de confirmación sin hacer ninguna acción
-    setShowModal(false);
   };
 
   // Lógica para manejar el envío del formulario y crear el anuncio
@@ -94,24 +69,6 @@ function LoginForm() {
     <Container>
       <Row className="justify-content-md-center">
         <Col md="6">
-          {/*Modal de confirmación */}
-          <Modal show={showModal} onHide={handleCancel}>
-            <Modal.Header closeButton>
-              <Modal.Title>Confirmar</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              ¿Estás seguro de que deseas crear el Usuario?
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleCancel}>
-                Cancelar
-              </Button>
-              <Button variant="primary" onClick={handleConfirm}>
-                Aceptar
-              </Button>
-            </Modal.Footer>
-          </Modal>
-
           {/*Alert para mostrar el mensaje de éxito */}
           {successMessage && <Alert variant="success">{successMessage}</Alert>}
           {/*Alert para mostrar el mensaje de error */}

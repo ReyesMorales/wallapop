@@ -37,10 +37,10 @@ function CreateRegister() {
       errors.name = "El nombre es obligatorio";
     }
     if (!number) {
-      errors.price = "El número telefonico es obligatorio";
+      errors.number = "El número telefonico es obligatorio";
     }
     if (!email) {
-      errors.price = "El correo electronico es obligatorio";
+      errors.email = "El correo electronico es obligatorio";
     }
     if (!password) {
       errors.password = "La contraseña es obligatoria";
@@ -79,7 +79,7 @@ function CreateRegister() {
     // Realizar la petición POST al backend
     try {
       await createUser(newUser); // Llama a la función de la API
-      setSuccessMessage("Anuncio creado con éxito");
+      setSuccessMessage("Usuario creado con éxito");
       setErrorMessage("");
       setName("");
       setNumber("");
@@ -88,7 +88,7 @@ function CreateRegister() {
     } catch (error) {
       // Si ocurre un error, establecer el mensaje de error y limpiar el mensaje de éxito
       setErrorMessage(
-        "Error al crear el anuncio. Por favor, inténtalo de nuevo."
+        "Error al crear el usuario. Por favor, inténtalo de nuevo."
       );
       setSuccessMessage("");
     }
@@ -99,7 +99,7 @@ function CreateRegister() {
     setShowModal(false);
   };
 
-  // Lógica para manejar el envío del formulario y crear el anuncio
+  // Lógica para manejar el envío del formulario y crear el usuario
 
   return (
     <Container>
@@ -111,7 +111,7 @@ function CreateRegister() {
               <Modal.Title>Confirmar</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              ¿Estás seguro de que deseas crear el anuncio?
+              ¿Estás seguro de que deseas crear el usuario?
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={handleCancel}>
@@ -153,7 +153,7 @@ function CreateRegister() {
                 value={gender}
                 onChange={(e) => setGender(e.target.value)}
               >
-                <option selected disabled>
+                <option value="" disabled>
                   - - - Selecciona tu género - - -
                 </option>
                 <option value="hombre">Hombre</option>
@@ -179,7 +179,7 @@ function CreateRegister() {
             <Form.Group controlId="formPrice">
               <Form.Label>Número de telefono:</Form.Label>
               <Form.Control
-                type="number"
+                type="tel"
                 placeholder="Ingresa tu numero de contacto"
                 value={number}
                 onChange={(e) => setNumber(e.target.value)}
