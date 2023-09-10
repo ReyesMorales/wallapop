@@ -8,16 +8,11 @@ var logger = require("morgan");
 var port = process.env.PORT;
 
 var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
 
 //conexion a DB
 require("./lib/connectMongoose");
 
 var app = express();
-
-// view engine setup
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "ejs");
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -41,30 +36,19 @@ app.get("/uploads/:imageName", (req, res) => {
   res.sendFile(path.join(__dirname, "public/uploads", imageName));
 });
 
-/**
- * Rutas del API
- */
-app.use("/api/adverts", require("./routes/api/adverts"));
-app.use("/api/users", require("./routes/api/users"));
+
 
 /**
  * Rutas del Website
  */
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
 
 // Ruta de prueba para verificar que el servidor funciona
 app.get("/", (req, res) => {
   res.send("¡El servidor backend está funcionando!");
 });
 
-//Cerrar Sesion
-app.get("/logout", (req, res) => {
-  res.clearCookie("access-token");
-  res.clearCookie("email-user");
-  res.clearCookie("user-name");
-  res.redirect("http://localhost:3000/login");
-});
+
 
 //Verificar Usuario
 app.get("/verify-email", async (req, res) => {
