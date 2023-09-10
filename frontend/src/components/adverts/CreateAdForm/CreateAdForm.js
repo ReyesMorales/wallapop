@@ -6,11 +6,11 @@ import {
   Row,
   Col,
   Alert,
-  Modal,
 } from "react-bootstrap";
-import { createAd } from "./service"; 
-import Layout from "../Layout/Layout";
-import RedirectToHome from "../RedirectToHome";
+import { createAd } from "../service";
+import Layout from "../../Layout/Layout";
+import RedirectToHome from "../../RedirectToHome";
+import { ModalConfirm } from "./components";
 
 
 function CreateAdForm() {
@@ -82,7 +82,6 @@ function CreateAdForm() {
       tags: tags.split(",").map((tag) => tag.trim()), // Divide la cadena y elimina espacios en blanco
       photo: photo,
     };
-    console.log("Datos a enviar al servidor:", newAdvert);
 
 
        // Realizar la petición POST al backend
@@ -113,25 +112,7 @@ function CreateAdForm() {
     setShowModal(false);
   };
 
-  const ModalConfirm = () => (
-    <Modal show={showModal} onHide={handleCancel}>
-            <Modal.Header closeButton>
-            <Modal.Title>Confirmar</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              ¿Estás seguro de que deseas crear el anuncio?
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleCancel}>
-                Cancelar
-              </Button>
-
-              <Button variant="dark" onClick={handleConfirm}>
-                Aceptar
-              </Button>
-            </Modal.Footer>
-          </Modal>
-  )
+  
 
   // Lógica para manejar el envío del formulario y crear el anuncio
 
@@ -142,7 +123,11 @@ function CreateAdForm() {
         <Col md="6">
         {!redirectToHome ? (
               <>
-          <ModalConfirm />
+          <ModalConfirm 
+          showModal={showModal}
+          handleCancel={handleCancel}
+          handleConfirm={handleConfirm}
+          />
           
 
           {/*Alert para mostrar el mensaje de éxito */}

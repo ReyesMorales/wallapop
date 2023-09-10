@@ -10,7 +10,7 @@ import {
 } from "react-router-dom";
 
 const AdvertsList = lazy(() => import("./components/adverts/AdvertsList/AdvertsList"));
-const CreateAdForm = lazy(() => import("./components/adverts/CreateAdForm"));
+const CreateAdForm = lazy(() => import("./components/adverts/CreateAdForm/CreateAdForm"));
 const EditAdForm = lazy(() => import("./components/adverts/EditAdForm"));
 const LoginForm = lazy(() => import("./components/auth/LoginForm"));
 const Register = lazy(() => import("./components/auth/Register"));
