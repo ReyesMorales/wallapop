@@ -5,9 +5,8 @@ import {
   Form,
   Row,
 } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import Layout from "../../Layout/Layout";
-import { EmptyList, ListWithAdverts } from './components';
+import { EmptyList, ListWithAdverts, Greeting } from './components';
 import { useGetAdverts } from './hooks';
 
 const AdvertsList = () => {
@@ -32,33 +31,13 @@ useGetAdverts(setAdverts); //este es el hook, hay que pasar parametros
   const username = cookie.get("user-name");
   const emailToken = cookie.get("email-user");
 
-  const Greeting = () => (
-    <div>
-      {username && (
-        <div
-          className="hidden"
-          style={{
-            padding: "30px",
-            width: "500px",
-            margin: "0 auto",
-            borderRadius: "30px",
-            backgroundColor: "#CEFE98",
-          }}
-        >
-          <h5>Hola {username}, Bienvenido de vuelta</h5>
-          <h6>Sesion Iniciada con {emailToken}</h6>
-          <br />
-          <Link to="http://localhost:4000/logout">
-            <Button variant="dark">Cerrar Sesion</Button>
-          </Link>
-        </div>
-      )}
-    </div>
-  );
-
+  
   return (
     <Layout title="Compra y vende cosas de segunda mano">
-      <Greeting />
+      <Greeting 
+      username={username}
+      emailToken={emailToken}
+      />
       <Form>
         <Row className="justify-content-center my-5">
           <Col xs="auto">
