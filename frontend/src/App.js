@@ -9,7 +9,7 @@ import {
   Navigate,
 } from "react-router-dom";
 
-const AdvertsList = lazy(() => import("./components/adverts/AdvertsList"));
+const AdvertsList = lazy(() => import("./components/adverts/AdvertsList/AdvertsList"));
 const CreateAdForm = lazy(() => import("./components/adverts/CreateAdForm"));
 const EditAdForm = lazy(() => import("./components/adverts/EditAdForm"));
 const LoginForm = lazy(() => import("./components/auth/LoginForm"));
