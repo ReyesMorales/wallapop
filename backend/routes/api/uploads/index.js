@@ -1,1 +1,1 @@
-router.use("/uploads/", require("./getImage"));
+router.use("/:imageName", require("./getImage"));

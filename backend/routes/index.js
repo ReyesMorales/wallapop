@@ -16,6 +16,6 @@ router.use(
  */
 router.use("/api/adverts", require("./api/adverts"));
 router.use("/api/users", require("./api/users"));
-router.use("/api/uploads", require("./api/uploads"));
+router.use("/uploads", require("./api/uploads"));
 
 module.exports = router;
