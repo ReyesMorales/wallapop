@@ -10,7 +10,7 @@ import {
 } from "react-router-dom";
 
 const AdvertsList = lazy(() => import("./components/adverts/AdvertsList/AdvertsList"));
-const CreateAdForm = lazy(() => import("./components/adverts/CreateAdForm/CreateAdForm"));
+const CreateAdvert = lazy(() => import("./components/adverts/CreateAdvert/CreateAdvert"));
 const EditAdForm = lazy(() => import("./components/adverts/EditAdForm"));
 const LoginForm = lazy(() => import("./components/auth/LoginForm"));
 const Register = lazy(() => import("./components/auth/Register"));
@@ -27,7 +27,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/detail/:advertId" element={<AdvertDetail />} />
             <Route path="/" element={<Navigate to="/adverts" />} />
-            <Route path="/create-advert" element={<CreateAdForm />} />
+            <Route path="/create-advert" element={<CreateAdvert />} />
             <Route path="/edit/:id" element={<EditAdForm />} />
           </Routes>
         </Suspense>
