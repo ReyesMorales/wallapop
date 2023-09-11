@@ -20,73 +20,20 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.get("/uploads/:imageName", (req, res) => {
-  console.log("Dentro de la ruta de imágenes"); // Nuevo log
-
-  const imageName = req.params.imageName;
-  const ext = path.extname(imageName);
-
-  if (ext === ".jpeg" || ext === ".jpg") {
-    res.setHeader("Content-Type", "image/jpeg");
-  } else if (ext === ".png") {
-    res.setHeader("Content-Type", "image/png");
-  }
-  console.log("Establecido el Content-Type a:", res.get("Content-Type")); // Nuevo log
-
-  res.sendFile(path.join(__dirname, "public/uploads", imageName));
-});
-
-
 
 /**
  * Rutas del Website
  */
 app.use("/", indexRouter);
 
-// Ruta de prueba para verificar que el servidor funciona
-app.get("/", (req, res) => {
-  res.send("¡El servidor backend está funcionando!");
-});
 
-
-
-//Verificar Usuario
-app.get("/verify-email", async (req, res) => {
-  try {
-    const token = req.query.token;
-    const user = await User.findOne({ emailToken: token });
-    if (user) {
-      user.emailToken = null;
-      user.isVerified = true;
-      await user.save();
-      res.redirect("/logout");
-    } else {
-      res.redirect("http://localhost:3000/");
-      console.log("El Correo electronico no esta verificado");
-    }
-  } catch (err) {
-    console.log(err);
-  }
-});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
 });
 
-// error handler
-// app.use(function (err, req, res, next) {
-// set locals, only providing error in development
-// res.locals.message = err.message;
-// res.locals.error = req.app.get("env") === "development" ? err : {};
 
-// render the error page
-//   res.status(err.status || 500);
-//   res.render("error");
-// });
 
-app.listen(port, () => {
-  console.log(`Servidor escuchando en el puerto ${port}`);
-});
 
 module.exports = app;
