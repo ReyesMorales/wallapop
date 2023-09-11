@@ -18,7 +18,6 @@ const AdvertsList = () => {
   const [adverts, setAdverts] = useState([]);
   const [query, setQuery] = useState("");
 
-
   const EmptyList = () => {
     return (
       <div>
@@ -29,7 +28,6 @@ const AdvertsList = () => {
       </div>
     );
   };
-
 
   useEffect(() => {
     // toma la lista de anuncios del backend por axios
@@ -109,7 +107,7 @@ const AdvertsList = () => {
                 {filterPosts.map((advert) => (
                   <Card
                     key={advert._id}
-                    style={{ width: "18rem" }}
+                    style={{ minWidth: "18rem", maxWidth: "18rem" }}
                     className="mb-5 mx-2"
                   >
                     <Card.Header>{advert.type}</Card.Header>
