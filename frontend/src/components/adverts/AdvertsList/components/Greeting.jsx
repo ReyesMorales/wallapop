@@ -17,7 +17,7 @@ export const Greeting = ({ username, emailToken }) => (
           <h5>Hola {username}, Bienvenido de vuelta</h5>
           <h6>Sesion Iniciada con {emailToken}</h6>
           <br />
-          <Link to="http://localhost:4000/logout">
+          <Link to="http://localhost:4000/api/users/logout">
             <Button variant="dark">Cerrar Sesion</Button>
           </Link>
         </div>
