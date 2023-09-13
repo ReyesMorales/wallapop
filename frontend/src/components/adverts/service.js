@@ -1,7 +1,7 @@
 import client from "../../api/client";
 
 /**
- * llamada al endpoint de la API para obtener el listado de anuncios
+ * llamada al endpoint de la API 
  */
 
 const advertsUrl = "/api/adverts";

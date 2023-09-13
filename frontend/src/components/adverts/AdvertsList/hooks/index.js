@@ -1,0 +1,1 @@
+export { useGetAdverts } from './useGetAdverts';
