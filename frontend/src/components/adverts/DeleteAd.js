@@ -29,26 +29,27 @@ function DeleteAd({ id, onAdDeleted }) {
   };
 
   return (
-      <div>
-        <Button variant="danger" onClick={() => setShowModal(true)}>Borrar Anuncio</Button>
-  
-        <Modal show={showModal} onHide={() => setShowModal(false)}>
-          <Modal.Header closeButton>
-            <Modal.Title>Confirmar borrado</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            ¿Estás seguro de que deseas borrar este anuncio?
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={() => setShowModal(false)}>Cancelar</Button>
-            <Button variant="dark" onClick={handleConfirm}>Confirmar</Button>
-          </Modal.Footer>
-        </Modal>
-  
-        {showSuccessMessage && <Alert variant="success">Anuncio borrado con éxito</Alert>}
-        {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
-      </div>
-    );
-  }
+    <div>
+    <Button variant="danger" onClick={() => setShowModal(true)}>Borrar Anuncio</Button>
+
+    <Modal show={showModal} onHide={() => setShowModal(false)}>
+      <Modal.Header closeButton>
+        <Modal.Title>Confirmar borrado</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        ¿Estás seguro de que deseas borrar este anuncio?
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={() => setShowModal(false)}>Cancelar</Button>
+        <Button variant="dark" onClick={handleConfirm}>Confirmar</Button>
+      </Modal.Footer>
+    </Modal>
+
+    {showSuccessMessage && <Alert variant="success">Anuncio borrado con éxito</Alert>}
+    {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
+  </div>
+  );
+}
+    
 
 export default DeleteAd;

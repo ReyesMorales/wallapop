@@ -1,15 +1,17 @@
+import { Container } from "react-bootstrap";
 import Header from "./Header";
 
 const Layout = ({ title, children }) => {
   return (
-
-    <div className="position-relative">
+    <div className="d-flex flex-column" style={{ minHeight: "100vh" }}>
       <Header />
-      <main>
+      <Container className="flex-fill">
         <h2 className="my-5">{title}</h2>
         {children}
-      </main>
-      <footer>@ 2023 Mighty Ducks Keepcoding Team</footer>
+      </Container>
+      <footer className="text-center py-3 bg-light">
+        &copy; 2023 Mighty Ducks Keepcoding Team
+      </footer>
     </div>
   );
 };
