@@ -11,7 +11,7 @@ import {
 
 const AdvertsList = lazy(() => import("./components/adverts/AdvertsList/AdvertsList"));
 const CreateAdvert = lazy(() => import("./components/adverts/CreateAdvert/CreateAdvert"));
-const EditAdForm = lazy(() => import("./components/adverts/EditAdForm"));
+const EditAdvert = lazy(() => import("./components/adverts/EditAdvert/EditAdvert"));
 const LoginForm = lazy(() => import("./components/auth/LoginForm"));
 const Register = lazy(() => import("./components/auth/Register"));
 const AdvertDetail = lazy(() => import("./components/adverts/AdvertDetail"));
@@ -28,7 +28,7 @@ function App() {
             <Route path="/detail/:advertId" element={<AdvertDetail />} />
             <Route path="/" element={<Navigate to="/adverts" />} />
             <Route path="/create-advert" element={<CreateAdvert />} />
-            <Route path="/edit/:id" element={<EditAdForm />} />
+            <Route path="/edit/:id" element={<EditAdvert />} />
           </Routes>
         </Suspense>
       </div>
