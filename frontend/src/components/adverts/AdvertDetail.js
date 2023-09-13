@@ -1,24 +1,37 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import Layout from "../Layout/Layout";
 import { useEffect, useState } from "react";
 import { getAdvert } from "./service";
-import { Card } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 import placeholderPhoto from "../../assets/placeholder.png";
+import DeleteAd from "../../components/adverts/DeleteAd";
+import RedirectToHome from "../RedirectToHome";
 
-const AdvertDetail = (props) => {
+const AdvertDetail = () => {
   const params = useParams();
-  const [advert, setAdvert] = useState([]);
+  const [advert, setAdvert] = useState(null);
+  const [operationSuccessful, setOperationSuccessful] = useState(false);
 
   useEffect(() => {
     getAdvert(params.advertId).then((advert) => setAdvert(advert));
   }, [params.advertId]);
 
+  const handleAdDeleted = (deletedId) => {
+    setOperationSuccessful(true);
+  };
+
   //TODO: botones de modificar anuncios o borrar en caso de ser dueño del anuncio
   //TODO: boton de contactar en caso de querer vender al anunciante o de comprar en caso de querer comprar.
+
+  
+  if (operationSuccessful) {
+    return <RedirectToHome />;
+  }
 
   return (
     <Layout title="Detalle de anuncio">
       <div className="d-flex justify-content-center">
+      {advert && (
         <Card
           key={advert._id}
           style={{ width: "100%", maxWidth: "30rem" }}
@@ -38,8 +51,13 @@ const AdvertDetail = (props) => {
             <Card.Text>{advert.description}</Card.Text>
             <Card.Text>Se ofrece {advert.price} €</Card.Text>
             <Card.Footer>Etiquetas: {advert.tags}</Card.Footer>
+            <Link to={`/edit/${advert._id}`} style={{ textDecoration: "none" }}>
+              <Button variant="dark">Editar</Button>
+            </Link>
+            <DeleteAd id={advert._id} onAdDeleted={handleAdDeleted} />
           </Card.Body>
         </Card>
+      )}
       </div>
     </Layout>
   );
