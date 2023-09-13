@@ -1,4 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 import "./App.css";
 import { Suspense, lazy } from "react";
@@ -8,6 +10,8 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
+
 
 const AdvertsList = lazy(() => import("./components/adverts/AdvertsList/AdvertsList"));
 const CreateAdvert = lazy(() => import("./components/adverts/CreateAdvert/CreateAdvert"));
@@ -31,6 +35,7 @@ function App() {
             <Route path="/edit/:id" element={<EditAdvert />} />
           </Routes>
         </Suspense>
+        <ToastContainer autoClose={3000} />
       </div>
     </Router>
   );
