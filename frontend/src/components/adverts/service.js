@@ -1,7 +1,7 @@
 import client from "../../api/client";
 
 /**
- * llamada al endpoint de la API 
+ * llamada al endpoint de la API
  */
 
 const advertsUrl = "/api/adverts";
@@ -12,6 +12,11 @@ export const getLatestAdverts = () => {
 
 export const getAdvert = (id) => {
   const url = `${advertsUrl}/${id}`;
+  return client.get(url);
+};
+
+export const getTags = () => {
+  const url = `${advertsUrl}/tags`;
   return client.get(url);
 };
 

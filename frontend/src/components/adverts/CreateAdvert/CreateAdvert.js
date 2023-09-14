@@ -49,8 +49,8 @@ function CreateAdvert() {
       price: parseFloat(price),
       description,
       type,
-      tags: tags.split(",").map(tag => tag.trim()),
-      photo
+      tags: tags.split(",").map((tag) => tag.trim()),
+      photo,
     };
     await postAd(newAdvert);
   };

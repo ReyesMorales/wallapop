@@ -9,7 +9,7 @@ const AdvertsList = () => {
   const [adverts, setAdverts] = useState([]);
   const [query, setQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(4); // Número de anuncios por página
+  const [itemsPerPage] = useState(4);
 
   // //este es el hook, hay que pasar parametros
   useGetAdverts(setAdverts);
