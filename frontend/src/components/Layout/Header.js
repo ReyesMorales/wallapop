@@ -1,17 +1,18 @@
 import { Button, Col, Container, Nav, Navbar } from "react-bootstrap";
 import { ReactComponent as Logo } from "../../assets/duck-icon.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
 
 
 function Header() {
   const [isLogged, setIsLogged] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
     setIsLogged(false);
-    window.location.href = '/';
+    navigate('/');
   };
 
   useEffect(() => {
