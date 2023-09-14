@@ -15,7 +15,6 @@ const AdvertsList = () => {
   
 useGetAdverts(setAdverts); //este es el hook, hay que pasar parametros
 
-
   /**Filtro de Busqueda de Publicaciones */
   const filterPosts = adverts.filter((advert) =>
     (advert.name ?? "").toUpperCase().startsWith(query.toUpperCase())
