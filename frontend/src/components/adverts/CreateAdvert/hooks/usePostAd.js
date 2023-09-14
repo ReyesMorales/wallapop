@@ -6,10 +6,10 @@ export const usePostAd = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [redirectToHome, setRedirectToHome] = useState(false);
 
-  const postAd = async (newAdvert) => {
-    // (Aquí deberías tener tu función para llamar a la API, la cual no proporcionaste en el ejemplo original, pero asumiré que existe como "createAd")
+  const postAd = async (newAdvert, token) => {
+    
     try {
-      await createAd(newAdvert);
+      await createAd(newAdvert, token);
       setSuccessMessage("Anuncio creado con éxito");
       setErrorMessage("");
       setTimeout(() => {
