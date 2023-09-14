@@ -26,7 +26,7 @@ export const ListWithAdverts = ({ username, filterPosts }) => (
             {(filterPosts ?? []).map((advert) => (
               <Card
                 key={advert._id}
-                style={{ width: "18rem" }}
+                style={{ minWidth: "18rem", maxWidth: "18rem" }}
                 className="mb-5 mx-2"
               >
                 <Card.Header>{advert.type}</Card.Header>
