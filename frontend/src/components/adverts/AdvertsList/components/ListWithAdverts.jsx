@@ -1,11 +1,15 @@
 import { Link } from "react-router-dom";
 import { Button, CardGroup, Card, ListGroup } from "react-bootstrap";
 import placeholderPhoto from "../../../../assets/placeholder.png";
+import { useUserAuthentication } from "../hooks"
 
 
-export const ListWithAdverts = ({ username, filterPosts }) => (
+export const ListWithAdverts = ({ filterPosts }) => {
+  const isLoggedIn = useUserAuthentication();
+
+  return (
     <>
-      {username && (
+      {isLoggedIn && (
         <Link
           to="/create-advert"
           style={{
@@ -61,3 +65,4 @@ export const ListWithAdverts = ({ username, filterPosts }) => (
       </div>
     </>
   );
+}
