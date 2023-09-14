@@ -15,12 +15,6 @@ const AdvertsList = () => {
   
 useGetAdverts(setAdverts); //este es el hook, hay que pasar parametros
 
-  const handleAdDeleted = (deletedId) => {
-    // Refresca la lista de anuncios o quita el anuncio de la lista en el estado
-    setAdverts((prevAdverts) =>
-      prevAdverts.filter((advert) => advert._id !== deletedId)
-    );
-  };
 
   /**Filtro de Busqueda de Publicaciones */
   const filterPosts = adverts.filter((advert) =>
@@ -60,7 +54,6 @@ useGetAdverts(setAdverts); //este es el hook, hay que pasar parametros
           <ListWithAdverts
             username={username}
             filterPosts={filterPosts}
-            handleAdDeleted={handleAdDeleted}
           />
         : <EmptyList />
       }

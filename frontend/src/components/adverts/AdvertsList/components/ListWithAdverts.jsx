@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom";
 import { Button, CardGroup, Card, ListGroup } from "react-bootstrap";
-import DeleteAd from '../../DeleteAd';
 import placeholderPhoto from "../../../../assets/placeholder.png";
 
 
-export const ListWithAdverts = ({ username, filterPosts, handleAdDeleted }) => (
+export const ListWithAdverts = ({ username, filterPosts }) => (
     <>
       {username && (
         <Link
@@ -55,13 +54,6 @@ export const ListWithAdverts = ({ username, filterPosts, handleAdDeleted }) => (
                 <Card.Footer>
                   <small className="text-muted">Etiquetas: {advert.tags}</small>
                 </Card.Footer>
-                <Link
-                  to={`/edit/${advert._id}`}
-                  style={{ textDecoration: "none" }}
-                >
-                  <Button variant="dark">Editar</Button>
-                </Link>
-                <DeleteAd onAdDeleted={handleAdDeleted} id={advert._id} />
               </Card>
             ))}
           </CardGroup>

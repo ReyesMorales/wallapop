@@ -1,30 +1,20 @@
 import React, { useState } from 'react';
-import { Button, Modal, Alert } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 import { deleteAdvert } from './service'; 
-import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 function DeleteAd({ id, onAdDeleted }) {
   const [showModal, setShowModal] = useState(false);
-  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(null);
-  const navigate = useNavigate();
 
   const handleConfirm = () => {
     deleteAdvert(id)
       .then(response => {
-        setShowModal(false);
-        setShowSuccessMessage(true);
-
+        toast.success("Anuncio borrado con éxito"); // Muestra un toast de éxito
         onAdDeleted(id); // Informar al componente padre que el anuncio ha sido borrado
-
-      // Redirigir al usuario a la página principal después de 2 segundos
-      setTimeout(() => {
-        navigate('/');  // Asume que la ruta de la página principal es '/'
-      }, 2000);  
       })
       .catch(error => {
         console.error('Error al borrar el anuncio:', error);
-        setErrorMessage('Hubo un error al borrar el anuncio. Por favor intenta nuevamente.');
+        toast.error("Hubo un error al borrar el anuncio. Por favor intenta nuevamente."); // Muestra un toast de error
       });
   };
 
@@ -44,9 +34,6 @@ function DeleteAd({ id, onAdDeleted }) {
         <Button variant="dark" onClick={handleConfirm}>Confirmar</Button>
       </Modal.Footer>
     </Modal>
-
-    {showSuccessMessage && <Alert variant="success">Anuncio borrado con éxito</Alert>}
-    {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
   </div>
   );
 }
