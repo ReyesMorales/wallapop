@@ -11,7 +11,6 @@ const { transporter } = require("../../../utils/userHelpers");
     "/",
     async (req, res, next) => {
       try {
-        console.log("Datos enviados desde el frontend:", req.body);
         // Obtener los datos del anuncio desde el cuerpo de la solicitud
         const { name, number, email, gender, password } = req.body;
   
