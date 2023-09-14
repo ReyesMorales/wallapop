@@ -17,21 +17,22 @@ router.post("/", async (req, res) => {
           const token = createToken(findUser.id);
           const nameUser = findUser.name;
           const emailUser = findUser.email;
-          console.log("El token de acceso es: ", token);
           res.cookie("access-token", token);
           res.cookie("user-name", nameUser);
           res.cookie("email-user", emailUser);
           // Responder al cliente con un mensaje de éxito
-          res.status(201).json({ mensaje: "Log In creado con éxito" });
+          res.status(201).json({ mensaje: "Log In creado con éxito", token: token, userId: findUser.id });
         } else {
           console.log("Contraseña Invalida");
           res.status(401).json({ mensaje: "Contraseña inválida" });
         }
       } else {
-        console.log("No se ha encontrado el usuario");res.status(404).json({ mensaje: "Usuario no encontrado" });
+        console.log("No se ha encontrado el usuario");
+        res.status(404).json({ mensaje: "Usuario no encontrado" });
       }
     } catch (err) {
       console.log(err);
+      res.status(500).json({ mensaje: "Error del servidor." });
     }
   });
   
