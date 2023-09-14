@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-import { Button } from "react-bootstrap";
 
 export const Greeting = ({ username, emailToken }) => (
     <div>
@@ -16,10 +14,6 @@ export const Greeting = ({ username, emailToken }) => (
         >
           <h5>Hola {username}, Bienvenido de vuelta</h5>
           <h6>Sesion Iniciada con {emailToken}</h6>
-          <br />
-          <Link to="http://localhost:4000/api/users/logout">
-            <Button variant="dark">Cerrar Sesion</Button>
-          </Link>
         </div>
       )}
     </div>
