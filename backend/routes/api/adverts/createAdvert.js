@@ -2,16 +2,20 @@ const express = require("express");
 const router = express.Router();
 const Advert = require("../../../models/Advert");
 const upload = require('../../../config/multerConfig');
+const { loginrequired } = require('../../../config/JWT');
+
 
 
 // Ruta para crear un nuevo anuncio
 // POST api/advets/create-advert
 router.post(
     "/",
+    loginrequired,
     upload.single("photo"),
     async (req, res, next) => {
+      console.log("ID del usuario:", res.newUser);
       try {
-        console.log("Datos enviados desde el frontend:", req.body);
+        console.log("Datos del usuario desde el middleware:", req.user);
         // Obtener los datos del anuncio desde el cuerpo de la solicitud
         const { name, price, description, type, tags } = req.body;
   
@@ -31,8 +35,9 @@ router.post(
           type,
           tags,
           photo: photoFilename,
+          owner: res.newUser
         });
-  
+        console.log('newAdvert: ', newAdvert);
         // Guardar el anuncio en la base de datos
         const savedAdvert = await newAdvert.save();
   
