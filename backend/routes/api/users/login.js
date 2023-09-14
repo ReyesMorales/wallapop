@@ -12,7 +12,7 @@ router.post("/", async (req, res) => {
       if (findUser) {
         const match = await bcrypt.compare(password, findUser.password);
         if (match) {
-          console.log("Sesion iniciada correctamente. Bien hecho");
+          console.log("Sesion iniciada correctamente");
           //Crear token
           const token = createToken(findUser.id);
           const nameUser = findUser.name;
@@ -25,9 +25,10 @@ router.post("/", async (req, res) => {
           res.status(201).json({ mensaje: "Log In creado con éxito" });
         } else {
           console.log("Contraseña Invalida");
+          res.status(401).json({ mensaje: "Contraseña inválida" });
         }
       } else {
-        console.log("No se ha encontrado el usuario");
+        console.log("No se ha encontrado el usuario");res.status(404).json({ mensaje: "Usuario no encontrado" });
       }
     } catch (err) {
       console.log(err);
