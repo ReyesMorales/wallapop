@@ -3,7 +3,7 @@ const router = express.Router();
 const cors = require("cors");
 const Advert = require("../../models/Advert.js");
 const cookie = require("cookie-parser");
-const upload = require('../../config/multerConfig');
+const upload = require("../../config/multerConfig");
 // const { loginrequired } = require("../../config/JWT.js");
 
 router.use(
@@ -13,6 +13,25 @@ router.use(
     credentials: true,
   })
 );
+
+//Devuelve una lista de tags permitidos
+router.get("/tags", (req, res, next) => {
+  //TODO: CAMBIAR A LLAMADA A BD PARA NO TENER LOS TAGS HARDCODEADOS
+  const tags = [
+    "Estilo de vida",
+    "Motor",
+    "Móvil",
+    "Trabajo",
+    "Tecnología",
+    "Mascotas",
+    "PCs",
+    "Ropa",
+    "Comida y Bebida",
+    "Otros",
+  ];
+
+  res.json({ tags });
+});
 
 // GET /api/adverts
 router.get(

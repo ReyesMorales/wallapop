@@ -9,7 +9,6 @@ const client = axios.create({
 });
 
 //interceptor para que solo recoja el campo .data de la respuesta
-// client.interceptors.response.use((response) => response.data.results);
 client.interceptors.response.use((response) => {
   if (response.data && response.data.results) {
     return response.data.results;
