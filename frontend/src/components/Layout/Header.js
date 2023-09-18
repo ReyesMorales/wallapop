@@ -1,11 +1,13 @@
 import { Button, Col, Container, Nav, Navbar } from "react-bootstrap";
 import { ReactComponent as Logo } from "../../assets/duck-icon.svg";
 import { Link, useNavigate } from "react-router-dom";
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from "react";
+import { useAuth } from "../auth/AuthContext"
+
 
 
 function Header() {
-  const [isLogged, setIsLogged] = useState(false);
+  const { isLogged, setIsLogged } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -35,7 +37,7 @@ function Header() {
 
     // Limpiar el listener cuando el componente se desmonte
     return () => window.removeEventListener('storage', handleStorageChange);
-}, []);
+}, [setIsLogged]);
 
 
 
