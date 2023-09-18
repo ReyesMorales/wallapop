@@ -3,8 +3,10 @@ import { Form, Button, Container, Row, Col, Alert } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { Login } from "./service";
 import Layout from "../Layout/Layout";
+import { useAuth } from "../auth/AuthContext"
 
 function LoginForm() {
+  const { setIsLogged } = useAuth();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -52,6 +54,7 @@ function LoginForm() {
          // Si el servidor devuelve un token y userId
           localStorage.setItem('token', response.token);
           localStorage.setItem('userId', response.userId);
+          setIsLogged(true);
       
 
         setSuccessMessage("Login hecho con éxito, bienvenido de vuelta");
