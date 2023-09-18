@@ -10,7 +10,8 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer } from "react-toastify";
+import { AuthProvider } from "../src/components/auth/AuthContext"
 
 
 const AdvertsList = lazy(() => import("./components/adverts/AdvertsList/AdvertsList"));
@@ -22,6 +23,7 @@ const AdvertDetail = lazy(() => import("./components/adverts/AdvertDetail"));
 
 function App() {
   return (
+    <AuthProvider>
     <Router>
       <div className="App">
         <Suspense fallback={<div>Loading...</div>}>
@@ -38,6 +40,7 @@ function App() {
         <ToastContainer autoClose={3000} />
       </div>
     </Router>
+    </AuthProvider>
   );
 }
 
