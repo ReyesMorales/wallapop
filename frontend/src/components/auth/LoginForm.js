@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Form, Button, Container, Row, Col, Alert } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Login } from "./service";
 import Layout from "../Layout/Layout";
 
 function LoginForm() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -57,7 +58,7 @@ function LoginForm() {
         setErrorMessage("");
         setEmail("");
         setPassword("");
-        window.location.href = "http://localhost:3000/adverts";
+        navigate('/adverts');
       } catch (error) {
         // Si ocurre un error, establecer el mensaje de error y limpiar el mensaje de éxito
         setErrorMessage(
