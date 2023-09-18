@@ -1,7 +1,11 @@
+import { useAuth } from "../../../auth/AuthContext"
 
-export const Greeting = ({ username }) => (
+export const Greeting = ({ username }) => {
+  const { isLogged } = useAuth();
+
+  return (
     <div>
-      {username && (
+      {isLogged && username && (
         <div
           className="hidden"
           style={{
@@ -17,3 +21,4 @@ export const Greeting = ({ username }) => (
       )}
     </div>
   );
+};
