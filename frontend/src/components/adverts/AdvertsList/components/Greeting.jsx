@@ -1,5 +1,5 @@
 
-export const Greeting = ({ username, emailToken }) => (
+export const Greeting = ({ username }) => (
     <div>
       {username && (
         <div
@@ -13,7 +13,6 @@ export const Greeting = ({ username, emailToken }) => (
           }}
         >
           <h5>Hola {username}, Bienvenido de vuelta</h5>
-          <h6>Sesion Iniciada con {emailToken}</h6>
         </div>
       )}
     </div>
