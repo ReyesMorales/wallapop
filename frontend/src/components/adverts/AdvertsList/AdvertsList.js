@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Button,
   Col,
@@ -12,24 +12,31 @@ import { useGetAdverts } from './hooks';
 const AdvertsList = () => {
   const [adverts, setAdverts] = useState([]);
   const [query, setQuery] = useState("");
+  const [username, setUsername] = useState(null);
   
 useGetAdverts(setAdverts); //este es el hook, hay que pasar parametros
+
+const updateUserInfoFromCookies = () => {
+  const cookie = require("js-cookie");
+  const usernameFromCookie = cookie.get("user-name");
+  setUsername(usernameFromCookie);
+};
+
+useEffect(() => {
+  // Establece los valores iniciales desde las cookies cuando el componente se monta
+  updateUserInfoFromCookies();
+}, [username]);
+
 
   /**Filtro de Busqueda de Publicaciones */
   const filterPosts = adverts.filter((advert) =>
     (advert.name ?? "").toUpperCase().startsWith(query.toUpperCase())
   );
-
-  const cookie = require("js-cookie");
-  const username = cookie.get("user-name");
-  const emailToken = cookie.get("email-user");
-
   
   return (
     <Layout title="Compra y vende cosas de segunda mano">
       <Greeting 
       username={username}
-      emailToken={emailToken}
       />
       <Form>
         <Row className="justify-content-center my-5">
