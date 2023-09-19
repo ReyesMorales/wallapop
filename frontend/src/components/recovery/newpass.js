@@ -76,7 +76,7 @@ function PasswordNew() {
       setPassword("");
       setPassword2("");
       alert(
-        "La contraseña se ha cambiado correctamente, Inicie Sesion de nuevo"
+        "La contraseña se ha cambiado correctamente, inicie Sesion de nuevo"
       );
       return <RedirectToHome />;
     } catch (error) {
