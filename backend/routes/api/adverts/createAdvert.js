@@ -5,7 +5,7 @@ const upload = require('../../../config/multerConfig');
 const { loginrequired } = require('../../../config/JWT');
 
 // Ruta para crear un nuevo anuncio
-// POST api/advets/create-advert
+// POST api/adverts/create-advert
 router.post(
     "/",
     loginrequired,
