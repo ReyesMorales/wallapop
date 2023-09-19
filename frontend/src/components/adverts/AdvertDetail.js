@@ -20,6 +20,8 @@ const AdvertDetail = () => {
     setOperationSuccessful(true);
   };
 
+  const userId = localStorage.getItem('userId');
+
   //TODO: botones de modificar anuncios o borrar en caso de ser dueño del anuncio
   //TODO: boton de contactar en caso de querer vender al anunciante o de comprar en caso de querer comprar.
 
@@ -51,10 +53,14 @@ const AdvertDetail = () => {
             <Card.Text>{advert.description}</Card.Text>
             <Card.Text>Se ofrece {advert.price} €</Card.Text>
             <Card.Footer>Etiquetas: {advert.tags}</Card.Footer>
-            <Link to={`/edit/${advert._id}`} style={{ textDecoration: "none" }}>
-              <Button variant="dark">Editar</Button>
-            </Link>
-            <DeleteAd id={advert._id} onAdDeleted={handleAdDeleted} />
+            { advert && userId === advert.owner && 
+              <>
+                <Link to={`/edit/${advert._id}`} style={{ textDecoration: "none" }}>
+                  <Button variant="dark">Editar</Button>
+                </Link>
+                <DeleteAd id={advert._id} onAdDeleted={handleAdDeleted} />
+              </>
+            }
           </Card.Body>
         </Card>
       )}

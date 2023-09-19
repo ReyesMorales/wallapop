@@ -1,9 +1,11 @@
-import { Link } from "react-router-dom";
-import { Button } from "react-bootstrap";
+import { useAuth } from "../../../auth/AuthContext"
 
-export const Greeting = ({ username, emailToken }) => (
+export const Greeting = ({ username }) => {
+  const { isLogged } = useAuth();
+
+  return (
     <div>
-      {username && (
+      {isLogged && username && (
         <div
           className="hidden"
           style={{
@@ -15,12 +17,8 @@ export const Greeting = ({ username, emailToken }) => (
           }}
         >
           <h5>Hola {username}, Bienvenido de vuelta</h5>
-          <h6>Sesion Iniciada con {emailToken}</h6>
-          <br />
-          <Link to="http://localhost:4000/api/users/logout">
-            <Button variant="dark">Cerrar Sesion</Button>
-          </Link>
         </div>
       )}
     </div>
   );
+};
