@@ -93,6 +93,7 @@ function PasswordNew() {
 
   if (!emailToken) {
     return <RedirectToHome />;
+
   }
   // Lógica para manejar el envío del formulario y crear el anuncio
 
