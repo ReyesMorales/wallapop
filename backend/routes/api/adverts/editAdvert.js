@@ -9,7 +9,7 @@ const { loginrequired } = require('../../../config/JWT');
 router.put("/:id", loginrequired, async (req, res, next) => {
     try {
       const { id } = req.params;
-      const updatedData = req.body; // Los datos actualizados se deben enviar en el cuerpo de la solicitud
+      const updatedData = req.body; // Los datos actualizados se envian en el cuerpo de la solicitud
   
       // Buscar el anuncio por ID
       const advert = await Advert.findById(id);   
@@ -24,12 +24,10 @@ router.put("/:id", loginrequired, async (req, res, next) => {
       }
 
       // Si el usuario es el propietario, actualizar el anuncio
-      const updatedAd = await Advert.findByIdAndUpdate(id, updatedData, {
-        new: true,
-      });
+      const updatedAd = await Advert.findByIdAndUpdate(id, updatedData, { new: true });
   
       // Si se actualiza correctamente, devolver el anuncio actualizado
-      res.json(updatedAd);
+      res.json({ message: "Anuncio actualizado con éxito", data: updatedAd });
     } catch (error) {
       next(error);
     }
