@@ -10,6 +10,7 @@ import {
 } from "react-bootstrap";
 import { recoveryPass2 } from "./service";
 import { Link } from "react-router-dom";
+import RedirectToHome from "../RedirectToHome"
 
 function PasswordNew() {
   const [password, setPassword] = useState("");
@@ -75,9 +76,9 @@ function PasswordNew() {
       setPassword("");
       setPassword2("");
       alert(
-        "La contraseña se ha cambiado correctamente, Inicie Sesion de nuevo"
+        "La contraseña se ha cambiado correctamente, inicie Sesion de nuevo"
       );
-      window.location.href = "/";
+      return <RedirectToHome />;
     } catch (error) {
       // Si ocurre un error, establecer el mensaje de error y limpiar el mensaje de éxito
       setErrorMessage("Las contraseñas no coinciden entre ellas.");
@@ -91,7 +92,8 @@ function PasswordNew() {
   };
 
   if (!emailToken) {
-    window.location.href = "/";
+    return <RedirectToHome />;
+
   }
   // Lógica para manejar el envío del formulario y crear el anuncio
 

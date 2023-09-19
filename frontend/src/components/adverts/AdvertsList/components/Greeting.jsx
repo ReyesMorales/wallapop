@@ -16,7 +16,7 @@ export const Greeting = ({ username }) => {
             backgroundColor: "#CEFE98",
           }}
         >
-          <h5>Hola {username}, Bienvenido de vuelta</h5>
+          <h5>Hola {username}, bienvenido de vuelta</h5>
         </div>
       )}
     </div>
