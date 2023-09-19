@@ -10,8 +10,10 @@ import {
 } from "react-bootstrap";
 import { recoveryPass2 } from "./service";
 import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 function PasswordNew() {
+  const navigate = useNavigate();
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
 
@@ -77,7 +79,8 @@ function PasswordNew() {
       alert(
         "La contraseña se ha cambiado correctamente, Inicie Sesion de nuevo"
       );
-      window.location.href = "http://localhost:4000/api/users/logout";
+      // navigate(`${process.env.REACT_APP_API_BASE_URL}/api/users/logout`);
+      window.location.href = "/";
     } catch (error) {
       // Si ocurre un error, establecer el mensaje de error y limpiar el mensaje de éxito
       setErrorMessage("Las contraseñas no coinciden entre ellas.");
@@ -91,7 +94,8 @@ function PasswordNew() {
   };
 
   if (!emailToken) {
-    window.location.href = "http://localhost:3000/";
+    // navigate('/');
+    window.location.href = "/";
   }
   // Lógica para manejar el envío del formulario y crear el anuncio
 

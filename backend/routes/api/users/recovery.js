@@ -1,3 +1,9 @@
+var express = require("express");
+var router = express.Router();
+const User = require("../../../models/User.js");
+const { transporter } = require ("../../../utils/userHelpers");
+
+
 //Recuperacion de contraseña
 router.post("/", async (req, res) => {
     try {
