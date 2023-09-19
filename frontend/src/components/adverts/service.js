@@ -1,7 +1,7 @@
 import client from "../../api/client";
 
 /**
- * llamada al endpoint de la API 
+ * llamada al endpoint de la API
  */
 
 const advertsUrl = "/api/adverts";

@@ -130,6 +130,12 @@ function LoginForm() {
                   Registrate aquí
                 </Link>
               </p>
+              <p>
+                ¿Olvidastes tu contraseña?{" "}
+                <Link to="/recovery" style={{ textDecoration: "none" }}>
+                  Recuperar contraseña
+                </Link>
+              </p>
             </Form>
           </Col>
         </Row>

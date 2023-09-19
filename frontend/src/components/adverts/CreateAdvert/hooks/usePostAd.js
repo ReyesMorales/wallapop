@@ -7,7 +7,6 @@ export const usePostAd = () => {
   const [redirectToHome, setRedirectToHome] = useState(false);
 
   const postAd = async (newAdvert, token) => {
-    
     try {
       await createAd(newAdvert, token);
       setSuccessMessage("Anuncio creado con éxito");
@@ -16,11 +15,12 @@ export const usePostAd = () => {
         setRedirectToHome(true);
       }, 2000);
     } catch (error) {
-      setErrorMessage("Error al crear el anuncio. Por favor, inténtalo de nuevo.");
+      setErrorMessage(
+        "Error al crear el anuncio. Por favor, inténtalo de nuevo."
+      );
       setSuccessMessage("");
     }
   };
 
   return { postAd, successMessage, errorMessage, redirectToHome };
-}
-
+};
