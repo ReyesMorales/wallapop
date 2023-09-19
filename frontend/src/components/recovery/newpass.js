@@ -77,7 +77,7 @@ function PasswordNew() {
       alert(
         "La contraseña se ha cambiado correctamente, Inicie Sesion de nuevo"
       );
-      window.location.href = "http://localhost:4000/api/users/logout";
+      window.location.href = "/";
     } catch (error) {
       // Si ocurre un error, establecer el mensaje de error y limpiar el mensaje de éxito
       setErrorMessage("Las contraseñas no coinciden entre ellas.");
@@ -91,7 +91,7 @@ function PasswordNew() {
   };
 
   if (!emailToken) {
-    window.location.href = "http://localhost:3000/";
+    window.location.href = "/";
   }
   // Lógica para manejar el envío del formulario y crear el anuncio
 
