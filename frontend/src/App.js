@@ -27,6 +27,8 @@ const Register = lazy(() => import("./components/auth/Register"));
 const AdvertDetail = lazy(() => import("./components/adverts/AdvertDetail"));
 const Recovery = lazy(() => import("./components/recovery/Recovery"));
 const PasswordNew = lazy(() => import("./components/recovery/NewPass"));
+const AboutUs = lazy(() => import('./components/Layout/AboutUs'));
+
 
 function App() {
   return (
@@ -44,6 +46,7 @@ function App() {
             <Route path="/edit/:id" element={<EditAdvert />} />
             <Route path="/recovery" element={<Recovery />} />
             <Route path="/restore-password" element={<PasswordNew />} />
+            <Route path="/about-us" element={< AboutUs />} />
           </Routes>
         </Suspense>
         <ToastContainer autoClose={3000} />
