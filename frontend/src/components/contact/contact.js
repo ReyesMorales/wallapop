@@ -15,7 +15,7 @@ function Contact() {
   const username = cookie.get("user-name");
 
   if (!username) {
-    window.location.href = "http://localhost:3000/login";
+    window.location.href = "/login";
   }
 
   useEffect(() => {
@@ -89,6 +89,7 @@ function Contact() {
     // Cerrar el Modal de confirmación sin hacer ninguna acción
     setShowModal(false);
   };
+  console.log(advert);
 
   return (
     <Container>
@@ -144,7 +145,11 @@ function Contact() {
                     }
                   />
                   <Card.Text>{advert.description}</Card.Text>
-                  <Card.Text>Se ofrece {advert.price} €</Card.Text>
+                  <Card.Text>
+                    {advert.type === "venta"
+                      ? `Se vende por ${advert.price} €`
+                      : `Se ofrece ${advert.price} €`}
+                  </Card.Text>
                   <Card.Footer>Etiquetas: {advert.tags}</Card.Footer>
                 </Card.Body>
               </Card>
