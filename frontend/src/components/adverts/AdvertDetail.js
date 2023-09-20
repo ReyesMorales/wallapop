@@ -22,9 +22,6 @@ const AdvertDetail = () => {
 
   const userId = localStorage.getItem("userId");
 
-  //TODO: botones de modificar anuncios o borrar en caso de ser dueño del anuncio
-  //TODO: boton de contactar en caso de querer vender al anunciante o de comprar en caso de querer comprar.
-
   if (operationSuccessful) {
     return <RedirectToHome />;
   }
