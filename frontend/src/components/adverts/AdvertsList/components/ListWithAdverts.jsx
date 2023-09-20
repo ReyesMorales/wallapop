@@ -19,7 +19,7 @@ export const ListWithAdverts = ({ filterPosts }) => {
             right: "140px",
           }}
         >
-          <Button variant="dark">Crear Anuncio</Button>
+          <Button variant="secondary">Crear Anuncio</Button>
         </Link>
       )}
       <br />
