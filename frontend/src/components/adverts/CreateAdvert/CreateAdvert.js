@@ -24,6 +24,11 @@ function CreateAdvert() {
     setPhoto,
   } = useFormState();
 
+  //Cookies
+  const cookie = require("js-cookie");
+  const username = cookie.get("user-name");
+  const senderEmail = cookie.get("email-user");
+
   const { formErrors, validateForm } = useValidation(
     name,
     description,
@@ -51,13 +56,14 @@ function CreateAdvert() {
       type,
       tags: tags.split(",").map((tag) => tag.trim()),
       photo,
+      senderEmail,
+      username,
     };
 
     // Recuperar el token de localStorage
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     // Pasar el token como segundo argumento a postAd
     await postAd(newAdvert, token);
-    
   };
 
   const handleCancel = () => {
@@ -101,6 +107,8 @@ function CreateAdvert() {
                   setTags={setTags}
                   photo={photo}
                   setPhoto={setPhoto}
+                  username={username}
+                  senderEmail={senderEmail}
                 />
               </>
             ) : (
