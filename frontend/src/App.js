@@ -25,8 +25,8 @@ const EditAdvert = lazy(() =>
 const LoginForm = lazy(() => import("./components/auth/LoginForm"));
 const Register = lazy(() => import("./components/auth/Register"));
 const AdvertDetail = lazy(() => import("./components/adverts/AdvertDetail"));
-const Recovery = lazy(() => import("./components/recovery/recovery"));
-const PasswordNew = lazy(() => import("./components/recovery/newpass"));
+const Recovery = lazy(() => import("./components/recovery/Recovery"));
+const PasswordNew = lazy(() => import("./components/recovery/NewPass"));
 
 function App() {
   return (
