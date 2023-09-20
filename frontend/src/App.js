@@ -10,8 +10,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import { AuthProvider } from "../src/components/auth/AuthContext"
-
+import { AuthProvider } from "../src/components/auth/AuthContext";
 
 const AdvertsList = lazy(() =>
   import("./components/adverts/AdvertsList/AdvertsList")
@@ -28,7 +27,7 @@ const AdvertDetail = lazy(() => import("./components/adverts/AdvertDetail"));
 const Recovery = lazy(() => import("./components/recovery/Recovery"));
 const PasswordNew = lazy(() => import("./components/recovery/NewPass"));
 const AboutUs = lazy(() => import('./components/Layout/AboutUs'));
-
+const Contact = lazy(() => import("./components/contact/contact"));
 
 function App() {
   return (
@@ -47,6 +46,7 @@ function App() {
             <Route path="/recovery" element={<Recovery />} />
             <Route path="/restore-password" element={<PasswordNew />} />
             <Route path="/about-us" element={< AboutUs />} />
+            <Route path="/contact/:advertId" element={<Contact />} />
           </Routes>
         </Suspense>
         <ToastContainer autoClose={3000} />

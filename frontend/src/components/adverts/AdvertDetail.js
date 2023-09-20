@@ -20,7 +20,7 @@ const AdvertDetail = () => {
     setOperationSuccessful(true);
   };
 
-  const userId = localStorage.getItem('userId');
+  const userId = localStorage.getItem("userId");
 
   if (operationSuccessful) {
     return <RedirectToHome />;
@@ -29,37 +29,54 @@ const AdvertDetail = () => {
   return (
     <Layout title="Detalle de anuncio">
       <div className="d-flex justify-content-center">
-      {advert && (
-        <Card
-          key={advert._id}
-          style={{ width: "100%", maxWidth: "30rem" }}
-          className="mb-5 mx-2"
-        >
-          <Card.Header>{advert.type}</Card.Header>
-          <Card.Body>
-            <Card.Title>{advert.name}</Card.Title>
-            <Card.Img
-              variant="top"
-              src={
-                advert.photo
-                  ? `${process.env.REACT_APP_API_BASE_URL}/uploads/${advert.photo}`
-                  : placeholderPhoto
-              }
-            />
-            <Card.Text>{advert.description}</Card.Text>
-            <Card.Text>Se ofrece {advert.price} €</Card.Text>
-            <Card.Footer>Etiquetas: {advert.tags}</Card.Footer>
-            { advert && userId === advert.owner && 
-              <>
-                <Link to={`/edit/${advert._id}`} style={{ textDecoration: "none" }}>
-                  <Button variant="dark">Editar</Button>
-                </Link>
-                <DeleteAd id={advert._id} onAdDeleted={handleAdDeleted} />
-              </>
-            }
-          </Card.Body>
-        </Card>
-      )}
+        {advert && (
+          <Card
+            key={advert._id}
+            style={{ width: "100%", maxWidth: "30rem" }}
+            className="mb-5 mx-2"
+          >
+            <Card.Header>{advert.type}</Card.Header>
+            <Card.Body>
+              <Card.Title>{advert.name}</Card.Title>
+              <Card.Img
+                variant="top"
+                src={
+                  advert.photo
+                    ? `${process.env.REACT_APP_API_BASE_URL}/uploads/${advert.photo}`
+                    : placeholderPhoto
+                }
+              />
+              <Card.Text>{advert.description}</Card.Text>
+              <Card.Text>
+                {advert.type === "venta"
+                  ? `Se vende por ${advert.price} €`
+                  : `Se ofrece ${advert.price} €`}
+              </Card.Text>
+              <Card.Footer>Etiquetas: {advert.tags}</Card.Footer>
+              {advert && userId === advert.owner && (
+                <>
+                  <Link
+                    to={`/edit/${advert._id}`}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <Button variant="dark" style={{ margin: "5px" }}>
+                      Editar
+                    </Button>
+                  </Link>
+
+                  <DeleteAd id={advert._id} onAdDeleted={handleAdDeleted} />
+                  <hr />
+                </>
+              )}
+              <Link
+                to={`/contact/${advert._id}`}
+                style={{ textDecoration: "none" }}
+              >
+                <Button variant="secondary">Contactar al vendedor</Button>
+              </Link>
+            </Card.Body>
+          </Card>
+        )}
       </div>
     </Layout>
   );

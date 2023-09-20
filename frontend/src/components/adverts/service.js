@@ -23,13 +23,15 @@ export const createAd = (newAdvert, token) => {
   formData.append("type", newAdvert.type);
   formData.append("tags", newAdvert.tags);
   formData.append("photo", newAdvert.photo);
+  formData.append("username", newAdvert.username);
+  formData.append("senderEmail", newAdvert.senderEmail);
 
   return client.post(`${advertsUrl}/create-advert`, formData, {
     headers: {
       "Content-Type": "multipart/form-data",
-      "Authorization": `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
-    withCredentials: true, 
+    withCredentials: true,
   });
 };
 
